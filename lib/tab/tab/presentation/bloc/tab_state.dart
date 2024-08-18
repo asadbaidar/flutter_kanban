@@ -1,4 +1,6 @@
-part of 'bloc.dart';
+import 'package:common/common.dart';
+import 'package:equatable/equatable.dart';
+import 'package:locale/locale.dart';
 
 class TabState extends Equatable {
   const TabState({
