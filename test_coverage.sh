@@ -50,7 +50,7 @@ done
 lcov -a $coverage_file "${coverage_files[@]}" -o coverage/lcov.merged.info
 
 # Remove unwanted files/directories from the merged coverage file
-lcov --remove coverage/lcov.merged.info '*/widgets/*' '*/view/*' '*/common/*' -o coverage/lcov.info
+lcov --remove coverage/lcov.merged.info '*/widgets/*' '*/view/*' '*/common/*' '**/*.g.dart' -o coverage/lcov.info
 
 # Generate HTML report
 genhtml coverage/lcov.info -o coverage/html

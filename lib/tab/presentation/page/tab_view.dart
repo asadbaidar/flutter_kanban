@@ -54,7 +54,7 @@ class _TabBody extends StatelessWidget {
       case TabItem.home:
         return const HomePage();
       case TabItem.board:
-        return Center(child: Text(LocaleStrings.board));
+        return const BoardPage();
       default:
         return const SizedBox.shrink();
     }

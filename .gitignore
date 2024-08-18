@@ -96,12 +96,9 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
-# Coverage
-coverage/
-
 # Submodules
-!pubspec.lock
-!packages/**/pubspec.lock
+pubspec.lock
+packages/**/pubspec.lock
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -128,6 +125,9 @@ app.*.map.json
 /.idea
 /build
 /coverage
+coverage/
+**/*.g.dart
+**/*.freezed.dart
 /macos
 /windows
 /web

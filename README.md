@@ -2,6 +2,12 @@
 
 core mobile app package.
 
+## Getting Started
+```sh
+$ flutter pub get
+$ dart run build_runner build --delete-conflicting-outputs
+```
+
 ## Development
 ```sh
 $ flutter build apk --flavor dev --target lib/main_dev.dart
