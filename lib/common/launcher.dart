@@ -40,7 +40,7 @@ Future<void> launcher(Callback<FutureOr<void>> config) async {
   await preloadImage(AssetImages.logo());
   await config();
   await initialzeDependencies();
-  
+
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   Bloc.observer = AppBlocObserver();

@@ -366,7 +366,9 @@ class CustomError extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            isFailure ? message ?? '' : emptyMessage ?? LocaleStrings.emptyMessage(),
+            isFailure
+                ? message ?? ''
+                : emptyMessage ?? LocaleStrings.emptyMessage(),
             style: context.bodyMedium
                 ?.withColor(context.onSurfaceVariant.withOpacity(0.6)),
             textAlign: centered ? TextAlign.center : null,

@@ -38,20 +38,20 @@ class ProjectEntity implements ToModel<Project> {
   final String? parentId;
 
   Map<String, dynamic> toJson() => _$ProjectEntityToJson(this);
-  
+
   @override
   Project toModel() => Project(
-      id: id,
-      name: name,
-      commentCount: commentCount,
-      order: order,
-      color: color,
-      isShared: isShared,
-      isFavorite: isFavorite,
-      isInboxProject: isInboxProject,
-      isTeamInbox: isTeamInbox,
-      viewStyle: viewStyle,
-      url: url,
-      parentId: parentId,
-    );
+        id: id,
+        name: name,
+        commentCount: commentCount,
+        order: order,
+        color: color,
+        isShared: isShared,
+        isFavorite: isFavorite,
+        isInboxProject: isInboxProject,
+        isTeamInbox: isTeamInbox,
+        viewStyle: viewStyle,
+        url: url,
+        parentId: parentId,
+      );
 }
