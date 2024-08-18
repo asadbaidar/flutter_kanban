@@ -1,4 +1,7 @@
-part of 'page.dart';
+import 'package:common/common.dart';
+import 'package:core/tab/home/home.dart';
+import 'package:flutter/material.dart';
+import 'package:locale/locale.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

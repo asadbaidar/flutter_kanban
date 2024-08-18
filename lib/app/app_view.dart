@@ -1,4 +1,7 @@
-part of 'app.dart';
+import 'package:common/common.dart';
+import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:locale/locale.dart';
 
 class App extends StatelessWidget {
   const App({

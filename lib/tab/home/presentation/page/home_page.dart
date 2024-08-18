@@ -1,4 +1,7 @@
-part of 'page.dart';
+import 'package:common/common.dart';
+import 'package:core/tab/home/home.dart';
+import 'package:core/tab/tab.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
