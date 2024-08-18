@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:common/common.dart';
 import 'package:core/app/app.dart';
+import 'package:core/core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -34,16 +35,17 @@ Future<void> launcher(Callback<FutureOr<void>> config) async {
     badge: true,
     sound: true,
   );
-  final deviceToken = await firebaseMessaging.getTokenOrEmpty();
+  final fcmToken = await firebaseMessaging.getTokenOrEmpty();
 
   await preloadImage(AssetImages.logo());
   await config();
-
+  await initialzeDependencies();
+  
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   Bloc.observer = AppBlocObserver();
 
-  runApp(App(deviceToken: deviceToken));
+  runApp(App(fcmToken: fcmToken));
 }
 
 class AppBlocObserver extends BlocObserver {

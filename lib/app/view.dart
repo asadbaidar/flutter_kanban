@@ -1,11 +1,30 @@
 part of 'app.dart';
 
+class App extends StatelessWidget {
+  const App({
+    super.key,
+    this.fcmToken = '',
+  });
+
+  final String fcmToken;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => context.unfocus(),
+      child: const LocaleProvider(
+        child: AppView(),
+      ),
+    );
+  }
+}
+
 class AppView extends StatelessWidget {
   const AppView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final router = context.read<AppRouter>();
+    final router = injector<AppRouter>();
     return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

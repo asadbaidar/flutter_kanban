@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:core/tab/presentation/page/page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,10 @@ class AppRouter {
           initialLocation: intiialRoute ?? AppRoutes.initial,
           routes: routes ?? AppRoutes.list(),
           observers: observers,
+          redirect: (context, state) {
+            $debugLog(state.uri, tag: 'route');
+            return null;
+          },
         );
 
   @visibleForTesting
