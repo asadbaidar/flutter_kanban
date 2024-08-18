@@ -1,4 +1,17 @@
-part of 'models.dart';
+part of 'bloc.dart';
+
+class TabState extends Equatable {
+  const TabState({
+    required this.currentTab,
+  });
+
+  final TabItem currentTab;
+
+  @override
+  List<Object> get props => [currentTab];
+
+  int get currentTabIndex => TabItem.items.indexOf(currentTab);
+}
 
 enum TabItem {
   home(AssetIcons.home),
@@ -14,6 +27,14 @@ enum TabItem {
 
   final AssetIcons icon;
 
+  static const List<TabItem> items = [
+    home,
+    // blank,
+    board,
+  ];
+}
+
+extension TabItemHelper on TabItem {
   String get title {
     switch (this) {
       case TabItem.home:
@@ -27,11 +48,5 @@ enum TabItem {
 
   String get path => 'tab/$name';
 
-  int get $index => items.indexOf(this);
-
-  static const List<TabItem> items = [
-    home,
-    // blank,
-    board,
-  ];
+  int get $index => TabItem.items.indexOf(this);
 }

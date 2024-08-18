@@ -1,4 +1,4 @@
-part of 'view.dart';
+part of 'app.dart';
 
 class AppCoreProviders extends StatelessWidget {
   const AppCoreProviders({

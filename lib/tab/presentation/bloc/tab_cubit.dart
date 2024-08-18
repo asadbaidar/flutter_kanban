@@ -1,12 +1,4 @@
-
-import 'package:common/common.dart';
-import 'package:core/tab/models/models.dart';
-import 'package:core/tab/view/view.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
-part 'tab_state.dart';
+part of 'bloc.dart';
 
 class TabCubit extends Cubit<TabState> {
   TabCubit({

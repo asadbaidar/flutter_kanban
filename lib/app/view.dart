@@ -1,4 +1,4 @@
-part of 'view.dart';
+part of 'app.dart';
 
 class AppView extends StatelessWidget {
   const AppView({super.key});

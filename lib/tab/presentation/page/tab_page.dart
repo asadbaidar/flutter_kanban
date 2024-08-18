@@ -1,4 +1,4 @@
-part of 'view.dart';
+part of 'page.dart';
 
 class TabPage extends StatelessWidget {
   const TabPage({
