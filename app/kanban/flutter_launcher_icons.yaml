@@ -1,0 +1,34 @@
+# dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true # can specify file name here e.g. "ic_launcher"
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  image_path: "assets/icon.png" # Image (1024 X 1024) for basic icon
+
+  # iOS Properties. i.e. "assets/icon-1024x1024.png"
+  # image_path_ios: "assets/icon-1024x1024.png"
+  # background_color_ios: "#FFFFFF"
+  # remove_alpha_ios: true
+
+  # Android Properties. i.e. "assets/icon-710x599-android.png"
+  # image_path_android: "assets/icon-710x599-android.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+  # Background Image (432 X 432) or Color for adaptive icon
+  # only available for Android 8.0 devices and above.
+  # i.e. "assets/icon_background.png" or "#FFFFFF"
+  # adaptive_icon_background: "assets/icon_background.png"
+  # adaptive_icon_background: "#FFFFFF"
+  
+  adaptive_icon_background: "#FFFFFF"
+
+  # Foreground Image (432 X 432) for adaptive icon. 
+  # Padding of 108px should be used arround the 432x432 image.
+  # only available for Android 8.0 devices and above.
+  # i.e. "assets/icon_foreground.png"
+  adaptive_icon_foreground: "assets/icon_foreground.png"
+
+  # Monochrome Image (432 X 432) for adaptive icon.
+  # Padding of 108px should be used arround the 432x432 image.
+  # only available for Android 13 devices and above.
+  # i.e. "assets/icon_monochrome.png"
+  # adaptive_icon_monochrome: "assets/icon_monochrome.png"

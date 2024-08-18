@@ -1,0 +1,23 @@
+{
+  "appName": "Kanban",
+  "save": "Ahorrar",
+  "discard": "Desechar",
+  "saveChanges": "Guardar cambios",
+  "saveChangesSubtitle": "¿Quieres guardar tus cambios?",
+  "done": "Hecho",
+  "cancel": "Cancelar",
+  "yes": "Sí",
+  "no": "No",
+  "next": "Siguiente",
+  "apply": "Aplicar",
+  "retry": "Reintentar",
+  "welcome": "¡Bienvenido!",
+  "selectProject": "Seleccionar proyecto",
+  "menu": "Menú",
+  "logOut": "Cerrar sesión",
+  "home": "Casa",
+  "board": "Tablero",
+  "data": "Datos",
+  "projects": "Proyectos",
+  "emptyMessage": "Parece que no tienes {}"
+}

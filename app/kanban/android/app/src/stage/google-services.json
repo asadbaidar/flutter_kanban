@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "691865484609",
+    "project_id": "kanban-todoist",
+    "storage_bucket": "kanban-todoist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691865484609:android:5bf11b0d72edfb6868f5c0",
+        "android_client_info": {
+          "package_name": "com.asadbaidar.kanban.stage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgF3Oex1QrLyakj6QLhfSsEp8-bwEjwEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

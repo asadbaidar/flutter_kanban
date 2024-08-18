@@ -1,0 +1,26 @@
+include: package:lint/analysis_options.yaml
+
+linter:
+  rules:
+    sort_constructors_first: true
+    prefer_single_quotes: true
+    avoid_slow_async_io: true
+    use_key_in_widget_constructors: true
+    only_throw_errors: true
+    use_colored_box: true
+    use_decorated_box: true
+    sort_pub_dependencies: false
+    avoid_field_initializers_in_const_classes: false
+
+analyzer:
+  errors:
+    todo: info
+    always_use_package_imports: error
+    require_trailing_commas: error
+    dead_null_aware_expression: error
+
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+

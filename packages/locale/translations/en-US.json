@@ -1,0 +1,23 @@
+{
+  "appName": "Kanban",
+  "save": "Save",
+  "discard": "Discard",
+  "saveChanges": "Save Changes",
+  "saveChangesSubtitle": "Do you want to save your changes?",
+  "done": "Done",
+  "cancel": "Cancel",
+  "yes": "Yes",
+  "no": "No",
+  "next": "Next",
+  "apply": "Apply",
+  "retry": "Retry",
+  "welcome": "Welcome!",
+  "selectProject": "Select project",
+  "menu": "Menu",
+  "logOut": "Log out",
+  "home": "Home",
+  "board": "Board",
+  "data": "Data",
+  "projects": "Projects",
+  "emptyMessage": "Looks like you have no {}"
+}
