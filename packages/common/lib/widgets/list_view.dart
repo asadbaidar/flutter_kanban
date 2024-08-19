@@ -288,6 +288,54 @@ class CustomListTile extends StatelessWidget {
   }
 }
 
+class CustomRadioListTile<T> extends StatelessWidget {
+  const CustomRadioListTile({
+    super.key,
+    this.title,
+    this.style,
+    this.padding = const EdgeInsets.all(16),
+    this.leading = false,
+    this.opposite,
+    required this.value,
+    this.groupValue,
+    this.onChanged,
+  });
+
+  final String? title;
+  final TextStyle? style;
+  final EdgeInsetsGeometry padding;
+  final bool leading;
+  final Widget? opposite;
+  final T value;
+  final T? groupValue;
+  final ValueChanged<T?>? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomInkWell(
+      onTap: () => onChanged?.call(value),
+      padding: padding,
+      child: CustomListTile(
+        title: title,
+        titleStyle: style ?? context.body2,
+        leading: leading ? radio : opposite,
+        trailing: leading ? opposite : radio,
+      ),
+    );
+  }
+
+  Widget get radio => Radio<T>(
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: const VisualDensity(
+          horizontal: VisualDensity.minimumDensity,
+          vertical: VisualDensity.minimumDensity,
+        ),
+      );
+}
+
 class CustomProgress extends StatelessWidget {
   const CustomProgress({
     super.key,

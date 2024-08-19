@@ -12,6 +12,12 @@ class AppRoutes {
             key: state.pageKey,
             page: state.pathParameters['page']!,
           ),
+          routes: [
+            GoRoute(
+              path: ProjectPage.subroute(),
+              pageBuilder: (_, __) => const ProjectPage(),
+            ),
+          ],
         ),
       ];
 }

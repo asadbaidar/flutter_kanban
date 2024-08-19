@@ -1,4 +1,5 @@
 import 'package:common/common.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,6 +50,21 @@ class AppTheme {
           statusBarIconBrightness: colorScheme.brightness.inverse,
           systemNavigationBarColor: colorScheme.surface,
           systemNavigationBarIconBrightness: colorScheme.brightness,
+        ),
+      ),
+      cupertinoOverrideTheme: CupertinoThemeData(
+        brightness: colorScheme.brightness,
+        scaffoldBackgroundColor: colorScheme.surface,
+        textTheme: CupertinoTextThemeData(
+          primaryColor: colorScheme.primary,
+          textStyle: textStyles.body1,
+        ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        clipBehavior: Clip.antiAlias,
+        constraints: BoxConstraints(
+          maxHeight: mediaQuery.size.height -
+              (mediaQuery.padding.top + kDefaultToolbarHeight),
         ),
       ),
       snackBarTheme: const SnackBarThemeData(

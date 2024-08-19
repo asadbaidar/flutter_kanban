@@ -1,4 +1,5 @@
 import 'package:common/common.dart';
+import 'package:core/feature/project/project.dart';
 import 'package:flutter/material.dart';
 import 'package:locale/locale.dart';
 
@@ -11,7 +12,7 @@ class TitleView extends StatelessWidget {
       title: LocaleStrings.appName,
       titleStyle: context.logo,
       titleMaxLines: 1,
-      customSubtitle: Text(LocaleStrings.selectProject),
+      customSubtitle: const SelectProjectView(),
     );
   }
 }

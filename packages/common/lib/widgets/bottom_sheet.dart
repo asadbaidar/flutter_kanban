@@ -57,7 +57,7 @@ class CustomBottomSheet extends StatelessWidget {
         if (title != null)
           CustomHeader(
             title: title,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           ),
         if (customTitle != null) customTitle!,
         if (loading)

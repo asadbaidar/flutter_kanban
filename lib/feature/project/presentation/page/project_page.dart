@@ -1,11 +1,11 @@
 import 'package:common/common.dart';
-import 'package:core/feature/project/presentation/page/project_view.dart';
+import 'package:core/feature/project/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 
 class ProjectPage extends Page<void> {
   const ProjectPage({super.key});
 
-  static String route() => RouteUri.tab(subroute());
+  static String route(String from) => RouteUri.path(from, routes: [subroute()]);
 
   static String subroute() => 'projects';
 

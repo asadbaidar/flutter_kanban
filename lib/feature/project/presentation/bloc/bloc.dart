@@ -1,2 +1,2 @@
-export 'project_cubit.dart';
+export 'project_bloc.dart';
 export 'project_state.dart';
