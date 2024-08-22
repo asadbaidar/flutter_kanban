@@ -18,10 +18,15 @@ class Environment {
   String get scheme => '$_scheme${isProd ? '' : '.$flavor'}';
 
   HttpClientConfig get config => HttpClientConfig(
-        baseUrl: host.endsWith('/') ? host : '$host/',
+        baseUrl: restUrl,
         enableLogs: !flavor.isProd,
         connectTimeout: 20.seconds,
       );
+  String get _host => host.endsWith('/') ? host : '$host/';
+
+  String get restUrl => _host.suffix('rest/v2/');
+
+  String get syncUrl => _host.suffix('sync/v9/');
 
   bool get isProd => flavor.isProd;
   bool get isStage => flavor.isStage;

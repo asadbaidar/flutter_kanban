@@ -1,5 +1,4 @@
 import 'package:common/common.dart';
-import 'package:core/tab/board/presentation/page/board_view.dart';
 import 'package:core/tab/tab.dart';
 import 'package:flutter/material.dart';
 

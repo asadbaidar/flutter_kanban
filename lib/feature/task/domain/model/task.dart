@@ -2,6 +2,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task.freezed.dart';
 
+typedef SectionTasks = Map<String, List<Task>>;
+
+@freezed
+class TaskData with _$TaskData {
+  const factory TaskData({
+    SectionTasks? all,
+  }) = _TaskData;
+}
+
 @freezed
 class Task with _$Task {
   const factory Task({

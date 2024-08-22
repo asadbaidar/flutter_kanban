@@ -10,3 +10,8 @@ targets:
         options:
           create_to_json: true
           field_rename: snake
+
+      freezed:
+        options:
+          map: true
+          when: true

@@ -1,1 +1,1 @@
-export '../tab/board/board.dart';
+export 'package:core/feature/feature.dart';

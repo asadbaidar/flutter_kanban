@@ -17,7 +17,7 @@
   "logOut": "Cerrar sesión",
   "home": "Casa",
   "board": "Tablero",
-  "data": "Datos",
   "projects": "Proyectos",
+  "available": "disponible",
   "emptyMessage": "Parece que no tienes {}"
 }

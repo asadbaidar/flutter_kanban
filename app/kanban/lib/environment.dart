@@ -10,7 +10,7 @@ class AppEnvironment {
   static const scheme = 'com.asadbaidar.kanban';
 
   /// Todoist host
-  static const host = 'https://api.todoist.com/rest/v2';
+  static const host = 'https://api.todoist.com';
 
   /// Todoist api token
   static const apiToken = '';

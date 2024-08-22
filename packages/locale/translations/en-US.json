@@ -17,7 +17,7 @@
   "logOut": "Log out",
   "home": "Home",
   "board": "Board",
-  "data": "Data",
   "projects": "Projects",
-  "emptyMessage": "Looks like you have no {}"
+  "available": "available",
+  "emptyMessage": "Looks like nothing {}"
 }

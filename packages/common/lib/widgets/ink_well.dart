@@ -537,6 +537,7 @@ class ColoredTagView extends StatelessWidget {
     this.text,
     this.foreground,
     this.background,
+    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
     this.margin = EdgeInsets.zero,
   });
 
@@ -545,20 +546,22 @@ class ColoredTagView extends StatelessWidget {
     this.text,
     this.foreground,
     this.background,
+    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
   }) : margin = const EdgeInsets.only(bottom: 12);
 
   final String? text;
   final Color? foreground;
   final Color? background;
+  final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
 
   @override
   Widget build(BuildContext context) {
     final color = foreground ?? context.primary;
     return CustomInkWell(
-      color: background ?? color.withOpacity(0.2),
+      color: background ?? color.withOpacity(0.1),
       borderRadius: 4,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: padding,
       margin: margin,
       child: Text(
         text ?? '',

@@ -4,16 +4,16 @@ abstract interface class ToModel<Model> {
   Model toModel();
 }
 
-abstract interface class FromModel<Entity, Model> {
-  Entity fromModel(Model model);
-}
-
 extension EntityToModelList<E extends ToModel<dynamic>> on List<E> {
   List<M> toModels<M>() => map((e) => e.toModel() as M).toList();
 }
 
 List<M> $mapToModels<E extends ToModel<M>, M>(List<E> entities) {
   return entities.map((e) => e.toModel()).toList();
+}
+
+M $mapToModel<E extends ToModel<M>, M>(E entity) {
+  return entity.toModel();
 }
 
 extension FromJsonArray on JsonArray {

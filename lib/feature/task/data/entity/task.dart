@@ -4,6 +4,28 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'task.g.dart';
 
+class TaskDataEntity implements ToModel<TaskData> {
+  TaskDataEntity({this.all});
+
+  factory TaskDataEntity.fromJson(JsonArray json) {
+    return TaskDataEntity(all: json.mapJsonArray(TaskEntity.fromJson));
+  }
+
+  final List<TaskEntity>? all;
+
+  JsonArray toJson() => all?.map((e) => e.toJson()).toList() ?? [];
+
+  @override
+  TaskData toModel() {
+    return TaskData(
+      all: all?.groupFoldBy(
+        (e) => e.sectionId ?? '',
+        (previous, e) => (previous ?? [])..add(e.toModel()),
+      ),
+    );
+  }
+}
+
 @JsonSerializable()
 class TaskEntity implements ToModel<Task> {
   TaskEntity({

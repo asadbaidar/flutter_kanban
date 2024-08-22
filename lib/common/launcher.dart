@@ -14,8 +14,8 @@ import 'package:locale/locale.dart';
 
 Future<void> launcher(Callback<FutureOr<void>> config) async {
   WidgetsFlutterBinding.ensureInitialized();
-  // TODO: await CacheStorage.initialize();
-  // TODO: CachedBloc.initialize();
+  await CacheStorage.initialize();
+  CachedBloc.initialize();
 
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();

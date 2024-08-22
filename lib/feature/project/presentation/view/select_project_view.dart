@@ -10,34 +10,35 @@ class SelectProjectView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProjectBloc, ProjectState>(
-      builder: (context, state) {
-        return CustomInkWell(
-          pressedOpacity: 0.4,
-          enabled: state.projectDataState.isNotLoading,
-          onTap: () => context.go(ProjectPage.route(context.currentRoute)),
-          child: state.projectDataState.when(
-            loading: (_) => const Padding(
-              padding: EdgeInsets.only(top: 6),
-              child: CustomProgress.small(centered: false),
+    return ProjectListener(
+      child: BlocBuilder<ProjectBloc, ProjectState>(
+        builder: (context, state) {
+          return CustomInkWell(
+            onTap: () => context.go(ProjectPage.route(context.currentRoute)),
+            pressedOpacity: 0.4,
+            enabled: state.projectDataState.isNotLoading,
+            child: state.projectDataState.when(
+              loading: (_) => const Padding(
+                padding: EdgeInsets.only(top: 6),
+                child: CustomProgress.small(centered: false),
+              ),
+              otherwise: (_) => Row(
+                children: [
+                  Text(
+                    state.selectedOrFirst?.name ?? LocaleStrings.selectProject,
+                    style: context.body1,
+                  ),
+                  const SizedBox(width: 4),
+                  Icon(
+                    Icons.arrow_drop_down,
+                    color: context.onSurface,
+                  ),
+                ],
+              ),
             ),
-            otherwise: (_) => Row(
-              children: [
-                Text(
-                  state.selectedProjectOrFirst?.name ??
-                      LocaleStrings.selectProject,
-                  style: context.body1,
-                ),
-                const SizedBox(width: 4),
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: context.onSurface,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

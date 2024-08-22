@@ -253,9 +253,7 @@ class CustomListTile extends StatelessWidget {
             children: [
               if (hasTitle)
                 DefaultTextStyle(
-                  style: titleStyle ??
-                      context.bodyMedium?.onPrimaryContainer(context) ??
-                      const TextStyle(),
+                  style: titleStyle ?? context.bodyMedium ?? const TextStyle(),
                   maxLines: titleMaxLines,
                   overflow: titleMaxLines == 1
                       ? TextOverflow.ellipsis
@@ -266,9 +264,7 @@ class CustomListTile extends StatelessWidget {
               if (hasSubtitle)
                 DefaultTextStyle(
                   style: subtitleStyle ??
-                      context.bodyMedium
-                          ?.onPrimaryContainer(context)
-                          .focused() ??
+                      context.bodyMedium?.focused() ??
                       const TextStyle(),
                   maxLines: subtitleMaxLines,
                   overflow: subtitleMaxLines == 1

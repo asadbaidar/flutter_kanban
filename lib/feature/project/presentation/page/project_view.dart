@@ -33,7 +33,7 @@ class _ProjectBody extends StatelessWidget {
           otherwise: (data) {
             return ProjectListView(
               projects: data.value ?? [],
-              selected: state.selectedProjectOrFirst,
+              selected: state.selectedOrFirst,
             );
           },
         );

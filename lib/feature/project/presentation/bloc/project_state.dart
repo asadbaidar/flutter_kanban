@@ -6,7 +6,7 @@ part 'project_state.freezed.dart';
 
 typedef ProjectDataState = Data<List<Project>>;
 
-@Freezed()
+@freezed
 class ProjectState with _$ProjectState {
   const factory ProjectState({
     @Default(ProjectDataState()) ProjectDataState projectDataState,
@@ -17,6 +17,7 @@ class ProjectState with _$ProjectState {
 extension ProjectStateValue on ProjectState {
   List<Project> get projects => projectDataState.value ?? [];
 
-  Project? get selectedProjectOrFirst =>
-      selectedProject ?? projects.firstOrNull;
+  Project? get selectedOrFirst => selectedProject ?? projects.firstOrNull;
+
+  String get selectedId => selectedOrFirst?.id ?? '';
 }

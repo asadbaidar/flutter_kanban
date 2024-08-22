@@ -1,6 +1,7 @@
 import 'package:common/common.dart';
 import 'package:core/core.dart';
-import 'package:core/feature/project/presentation/presentation.dart';
+import 'package:core/feature/project/project.dart';
+import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locale/locale.dart';
@@ -32,6 +33,8 @@ class AppFeatureProviders extends StatelessWidget {
     return MultiBlocProvider(
       providers: const [
         BlocProviderGet<ProjectBloc>(),
+        BlocProviderGet<TaskBloc>(),
+        BlocProviderGet<SectionBloc>(),
       ],
       child: const AppView(),
     );

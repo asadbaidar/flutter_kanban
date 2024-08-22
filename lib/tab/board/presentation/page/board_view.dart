@@ -1,7 +1,7 @@
 import 'package:common/common.dart';
+import 'package:core/feature/task/task.dart';
 import 'package:core/tab/home/presentation/view/view.dart';
 import 'package:flutter/material.dart';
-import 'package:locale/locale.dart';
 
 class BoardView extends StatelessWidget {
   const BoardView({super.key});
@@ -22,8 +22,6 @@ class _BoardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(LocaleStrings.board),
-    );
+    return const TaskView();
   }
 }

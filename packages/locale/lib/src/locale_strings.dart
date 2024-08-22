@@ -39,10 +39,10 @@ class LocaleStrings {
 
   static String get board => 'board'.tr();
 
-  static String get data => 'data'.tr();
-
   static String get projects => 'projects'.tr();
 
+  static String get available => 'available'.tr();
+
   static String emptyMessage([String? value]) =>
-      'emptyMessage'.tr(args: [value ?? LocaleStrings.data]);
+      'emptyMessage'.tr(args: [value ?? LocaleStrings.available]);
 }
