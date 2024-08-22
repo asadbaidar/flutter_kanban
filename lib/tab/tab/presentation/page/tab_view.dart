@@ -14,7 +14,9 @@ class TabView extends StatelessWidget {
         final tab = context.newTab;
         if (tab != null) context.read<TabCubit>().changeTab(tab);
       },
-      child: const _TabScafold(),
+      child: const SmartCupertinoScafold(
+        body: _TabScafold(),
+      ),
     );
   }
 }
