@@ -12,13 +12,13 @@ class CommentListView extends StatelessWidget {
       buildWhen: (previous, current) => previous.dataState != current.dataState,
       builder: (context, state) {
         return state.dataState.when(
-          loading: (_) => const CustomProgress.small().paddingAll(16).sliverBox,
+          otherwise: (_) => const CustomProgress.small().paddingAll(16).sliverBox,
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,
             onRetry: () => context.read<CommentBloc>().getComments(),
           ).sliverBox,
-          otherwise: (data) {
+          loaded: (data) {
             final comments = state.comments;
             return CommentList(items: comments);
           },

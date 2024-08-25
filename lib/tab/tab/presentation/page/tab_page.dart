@@ -13,9 +13,9 @@ class TabPage extends StatelessWidget {
 
   static String path() => '/tab/:page';
 
-  static String route([TabItem? tab]) => RouteUri.tab(tab?.name ?? _firstTab);
+  static String route([TabItem? tab]) => RouteUri.tab(tab?.name ?? _defaultTab);
 
-  static String get _firstTab => TabItem.items.first.name;
+  static String get _defaultTab => TabItem.items.last.name;
 
   TabItem get _tab => TabItem.fromName(page);
 

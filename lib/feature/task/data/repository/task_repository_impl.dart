@@ -13,6 +13,11 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
+  Future<List<CompletedTask>> getCompletedTasks(String projectId) {
+    return dataSource.getCompletedTasks(projectId).then($mapToModels);
+  }
+
+  @override
   Future<Task> createTask(TaskDto dto) {
     return dataSource
         .createTask(TaskDtoEntity.fromModel(dto))
@@ -29,5 +34,15 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<void> moveTask({String? id, String? sectionId}) {
     return dataSource.moveTask(id: id, sectionId: sectionId);
+  }
+
+  @override
+  Future<void> closeTask(String id) {
+    return dataSource.closeTask(id);
+  }
+
+  @override
+  Future<void> reopenTask(String id) {
+    return dataSource.reopenTask(id);
   }
 }

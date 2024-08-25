@@ -8,12 +8,14 @@ class DynamicText extends StatelessWidget {
     required this.subtitle,
     this.style,
     this.maxLines = 4,
+    this.subtitleRequired = false,
   });
 
   final String title;
   final String subtitle;
   final TextStyle? style;
   final int maxLines;
+  final bool subtitleRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,12 @@ class DynamicText extends StatelessWidget {
                 maxWidth: width,
               );
 
-        final headLines = titleLines > maxLines ? maxLines : titleLines;
-        final subLines = titleLines >= maxLines ? 0 : maxLines - titleLines;
+        final subtitleLines = subtitleRequired && subtitle.isNotBlank ? 1 : 0;
+
+        final headLines =
+            titleLines >= maxLines ? maxLines - subtitleLines : titleLines;
+        final subLines =
+            titleLines >= maxLines ? subtitleLines : maxLines - titleLines;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

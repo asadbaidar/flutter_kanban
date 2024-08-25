@@ -13,6 +13,7 @@ class ProjectListener extends SingleChildStatelessWidget {
       listener: (context, state) {
         context.read<TaskBloc>().projectChanged(state.selectedOrFirst);
         context.read<SectionBloc>().projectChanged(state.selectedOrFirst);
+        context.read<TaskCompletedBloc>().projectChanged(state.selectedOrFirst);
       },
       child: child,
     );

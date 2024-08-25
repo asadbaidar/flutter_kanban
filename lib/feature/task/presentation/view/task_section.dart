@@ -18,13 +18,13 @@ class TaskSectionView extends StatelessWidget {
           previous.taskDataState != current.taskDataState,
       builder: (context, state) {
         return state.taskDataState.when(
-          loading: (_) => const CustomProgress.medium(),
+          otherwise: (_) => const CustomProgress.medium(),
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,
             onRetry: () => context.read<TaskBloc>().getTasks(),
           ),
-          otherwise: (data) => _TaskSectionBuilder(
+          loaded: (data) => _TaskSectionBuilder(
             sectionTasks: state.sectionTasks,
           ),
         );

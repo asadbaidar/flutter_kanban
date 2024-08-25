@@ -21,6 +21,24 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   }
 
   @override
+  Future<List<CompletedTaskEntity>> getCompletedTasks(String projectId) {
+    return httpClient.post<JsonObject>(
+      baseUrl: environment.syncUrl,
+      path: TaskEndpoints.completed,
+      body: {
+        'project_id': projectId,
+      },
+    ).then(
+      (json) =>
+          $mapList(
+            json['items'],
+            (e) => CompletedTaskEntity.fromJson(e as JsonObject),
+          ) ??
+          [],
+    );
+  }
+
+  @override
   Future<TaskEntity> createTask(TaskDtoEntity dto) {
     return httpClient
         .post<JsonObject>(
@@ -52,6 +70,20 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
           'section_id': sectionId,
         },
       ).toFormData(),
+    );
+  }
+
+  @override
+  Future<void> closeTask(String id) {
+    return httpClient.post(
+      path: TaskEndpoints.close(id),
+    );
+  }
+
+  @override
+  Future<void> reopenTask(String id) {
+    return httpClient.post(
+      path: TaskEndpoints.reopen(id),
     );
   }
 }

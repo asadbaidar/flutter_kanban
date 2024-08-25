@@ -35,6 +35,7 @@ class AppFeatureProviders extends StatelessWidget {
         BlocProviderGet<ProjectBloc>(),
         BlocProviderGet<TaskBloc>(),
         BlocProviderGet<SectionBloc>(),
+        BlocProviderGet<TaskCompletedBloc>(),
       ],
       child: const AppView(),
     );

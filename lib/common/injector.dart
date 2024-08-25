@@ -32,7 +32,7 @@ Future<void> initialzeDependencies() async {
       () => ProjectBloc(projectRepository: injector())..getProjects(),
     )
 
-    // // Section
+    // Section
     ..registerLazySingleton<SectionRemoteDataSource>(
       () => SectionRemoteDataSourceImpl(httpClient: injector()),
     )
@@ -43,7 +43,7 @@ Future<void> initialzeDependencies() async {
       () => SectionBloc(sectionRepository: injector()),
     )
 
-    // // Task
+    // Task
     ..registerLazySingleton<TaskRemoteDataSource>(
       () => TaskRemoteDataSourceImpl(
         httpClient: injector(),
@@ -57,6 +57,11 @@ Future<void> initialzeDependencies() async {
       () => TaskBloc(taskRepository: injector()),
     )
 
+    // Completed Task
+    ..registerFactory<TaskCompletedBloc>(
+      () => TaskCompletedBloc(taskRepository: injector()),
+    )
+    
     // Comment
     ..registerLazySingleton<CommentRemoteDataSource>(
       () => CommentRemoteDataSourceImpl(httpClient: injector()),

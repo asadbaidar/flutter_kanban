@@ -24,13 +24,13 @@ class _ProjectBody extends StatelessWidget {
     return BlocBuilder<ProjectBloc, ProjectState>(
       builder: (context, state) {
         return state.projectDataState.when(
-          loading: (data) => const CustomProgress.medium(),
+          otherwise: (_) => const CustomProgress.medium(),
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             emptyMessage: LocaleStrings.emptyMessage(),
             message: data.errorMessage,
           ),
-          otherwise: (data) {
+          loaded: (data) {
             return ProjectListView(
               projects: data.value ?? [],
               selected: state.selectedOrFirst,

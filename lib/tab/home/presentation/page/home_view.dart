@@ -1,7 +1,7 @@
 import 'package:common/common.dart';
+import 'package:core/feature/task/task.dart';
 import 'package:core/tab/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:locale/locale.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -23,8 +23,6 @@ class _HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(LocaleStrings.home),
-    );
+    return const CompletedTaskListView();
   }
 }
