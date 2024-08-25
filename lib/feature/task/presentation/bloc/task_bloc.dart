@@ -29,6 +29,7 @@ extension TaskUpdateBloc on TaskBloc {
     emit(
       state.copyWith(
         taskDataState: state.taskDataState.copyWith(
+          key: task.id,
           value: TaskData(all: state.sectionTasks.addTask(task)),
         ),
       ),
@@ -39,6 +40,7 @@ extension TaskUpdateBloc on TaskBloc {
     emit(
       state.copyWith(
         taskDataState: state.taskDataState.copyWith(
+          key: task.id,
           value: TaskData(
             all: state.sectionTasks.removeTask(task).addTask(task),
           ),
