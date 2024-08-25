@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:core/core.dart';
+import 'package:core/feature/comment/presentation/view/provider.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,11 +27,16 @@ class TaskFormPage extends Page<void> {
       settings: this,
       constraints: context.fullSheetConstraints,
       isScrollControlled: true,
-      builder: (context) => BlocProvider(
-        create: (context) => TaskFormBloc(
-          taskRepository: injector(),
-          task: context.read<TaskBloc>().state.sectionTasks.getById(id),
-        ),
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => TaskFormBloc(
+              taskRepository: injector(),
+              task: context.read<TaskBloc>().state.sectionTasks.getById(id),
+            ),
+          ),
+          if (id != null) CommentProvider(taskId: id),
+        ],
         child: const TaskFormContent(),
       ),
     );

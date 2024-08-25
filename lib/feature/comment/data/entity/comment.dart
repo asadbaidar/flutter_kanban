@@ -18,6 +18,15 @@ class CommentEntity implements ToModel<Comment> {
   factory CommentEntity.fromJson(Map<String, dynamic> json) =>
       _$CommentEntityFromJson(json);
 
+  factory CommentEntity.fromModel(Comment model) => CommentEntity(
+        content: model.content,
+        id: model.id,
+        postedAt: model.postedAt?.toIso8601String(),
+        projectId: model.projectId,
+        taskId: model.taskId,
+        attachment: $mapTo(model.attachment, AttachmentEntity.fromModel),
+      );
+
   final String? content;
   final String? id;
   final String? postedAt;
@@ -25,13 +34,13 @@ class CommentEntity implements ToModel<Comment> {
   final String? taskId;
   final AttachmentEntity? attachment;
 
-  Map<String, dynamic> toJson() => _$CommentEntityToJson(this);
+  Map<String, dynamic> toJson() => _$CommentEntityToJson(this).nonBlankValues;
 
   @override
   Comment toModel() => Comment(
         content: content,
         id: id,
-        postedAt: postedAt,
+        postedAt: DateTime.tryParse(postedAt ?? ''),
         projectId: projectId,
         taskId: taskId,
         attachment: attachment?.toModel(),
@@ -49,6 +58,13 @@ class AttachmentEntity implements ToModel<Attachment> {
 
   factory AttachmentEntity.fromJson(Map<String, dynamic> json) =>
       _$AttachmentEntityFromJson(json);
+
+  factory AttachmentEntity.fromModel(Attachment model) => AttachmentEntity(
+        fileName: model.fileName,
+        fileType: model.fileType,
+        fileUrl: model.fileUrl,
+        resourceType: model.resourceType,
+      );
 
   final String? fileName;
   final String? fileType;

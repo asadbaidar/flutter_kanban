@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:core/common/common.dart';
+import 'package:core/feature/comment/comment.dart';
 import 'package:core/feature/project/project.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/widgets.dart';
@@ -54,18 +55,15 @@ Future<void> initialzeDependencies() async {
     )
     ..registerFactory<TaskBloc>(
       () => TaskBloc(taskRepository: injector()),
-    );
+    )
 
-  // // Comment
-  // ..registerLazySingleton<CommentRemoteDataSource>(
-  //   () => CommentRemoteDataSourceImpl(httpClient: injector()),
-  // )
-  // ..registerLazySingleton<CommentRepository>(
-  //   () => CommentRepositoryImpl(dataSource: injector()),
-  // )
-  // ..registerFactory<CommentBloc>(
-  //   () => CommentBloc(commentRepository: injector())..getComments(),
-  // );
+    // Comment
+    ..registerLazySingleton<CommentRemoteDataSource>(
+      () => CommentRemoteDataSourceImpl(httpClient: injector()),
+    )
+    ..registerLazySingleton<CommentRepository>(
+      () => CommentRepositoryImpl(dataSource: injector()),
+    );
 }
 
 class BlocProviderGet<T extends StateStreamableSource<Object?>>

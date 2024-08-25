@@ -7,12 +7,14 @@ class TaskFormContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomBottomSheet(
-      dragHandle: CustomDragHandle(padding: EdgeInsets.only(top: 16)),
-      leadingAction: TaskDiscardButton(),
-      trailingAction: TaskSubmitButton(),
-      customTitle: SizedBox(height: 16),
-      body: TaskInputForm(),
+    return const Scaffold(
+      body: CustomBottomSheet(
+        dragHandle: CustomDragHandle(padding: EdgeInsets.only(top: 16)),
+        leadingAction: TaskDiscardButton(),
+        trailingAction: TaskSubmitButton(),
+        customTitle: SizedBox(height: 16),
+        body: TaskInputForm(),
+      ),
     );
   }
 }

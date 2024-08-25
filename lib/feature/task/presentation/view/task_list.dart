@@ -39,6 +39,7 @@ class TaskListView extends StatelessWidget {
         final draggingItem = state.draggingTask;
         return CustomListView(
           itemCount: items.length,
+          footerBuilder: (_) => const SizedBox(height: 40),
           itemBuilder: (context, index) {
             final item = items[index];
             return DraggableTaskItem(

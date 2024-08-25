@@ -7,7 +7,7 @@ class Comment with _$Comment {
   const factory Comment({
     String? content,
     String? id,
-    String? postedAt,
+    DateTime? postedAt,
     String? projectId,
     String? taskId,
     Attachment? attachment,
@@ -22,4 +22,11 @@ class Attachment with _$Attachment {
     String? fileUrl,
     String? resourceType,
   }) = _Attachment;
+}
+
+int commentsByRecent(Comment a, Comment b) {
+  if (a.postedAt == null || b.postedAt == null) {
+    return 0;
+  }
+  return b.postedAt!.compareTo(a.postedAt!);
 }

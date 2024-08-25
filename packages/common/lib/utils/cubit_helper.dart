@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:common/common.dart';
 
-extension CubitHelper<T> on Cubit<T> {
+typedef OnDataValue<V> = void Function(Data<V> data);
+
+extension CubitHelper<T> on BlocBase<T> {
   Future<void> when<V>(
     Data<V> value, {
     required FutureCallback<V> act,
-    required OnValue<Data<V>> emit,
+    required OnDataValue<V> emit,
+    OnDataValue<V>? onLoaded,
     Callback<Data<V>>? loading,
     OnValueCallback<Data<V>, V>? loaded,
     OnValueCallback<Data<V>, Object>? failure,
@@ -14,9 +17,10 @@ extension CubitHelper<T> on Cubit<T> {
     try {
       final result = await act();
       if (V.toString() == 'void') {
-        emit(value.toLoaded());
+        (onLoaded ?? emit)(value.toLoaded());
       } else {
-        emit(loaded?.call(result) ?? value.toLoaded(value: result));
+        (onLoaded ??
+            emit)(loaded?.call(result) ?? value.toLoaded(value: result));
       }
     } catch (e) {
       emit(failure?.call(e) ?? value.toFailure(error: e));
