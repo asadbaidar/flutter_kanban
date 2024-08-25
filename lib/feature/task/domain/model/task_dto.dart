@@ -1,3 +1,4 @@
+import 'package:core/feature/task/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_dto.freezed.dart';
@@ -8,15 +9,13 @@ class TaskDto with _$TaskDto {
     String? content,
     String? description,
     String? sectionId,
-    int? order,
     List<String>? labels,
     int? priority,
     String? dueString,
     String? dueDate,
-    String? dueDatetime,
-    String? dueLang,
+    DateTime? dueDatetime,
     String? assigneeId,
-    int? duration,
-    String? durationUnit,
+    String? duration,
+    DurationUnit? durationUnit,
   }) = _TaskDto;
 }

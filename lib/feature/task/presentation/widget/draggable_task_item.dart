@@ -13,6 +13,7 @@ class DraggableTaskItem extends StatelessWidget {
     this.dragKey,
     this.onDragStart,
     this.onDragEnd,
+    this.onTap,
   });
 
   final Section section;
@@ -23,6 +24,7 @@ class DraggableTaskItem extends StatelessWidget {
   final Key? dragKey;
   final OnValue<Task>? onDragStart;
   final VoidCallback? onDragEnd;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class DraggableTaskItem extends StatelessWidget {
                 item: item,
                 section: section,
                 loading: loading,
+                onTap: onTap,
               ),
             ),
     );

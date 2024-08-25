@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task.freezed.dart';
@@ -22,8 +23,8 @@ class Task with _$Task {
     bool? isCompleted,
     String? content,
     String? description,
-    Due? due,
-    Duration? duration,
+    TaskDue? due,
+    TaskDuration? duration,
     String? id,
     List<String>? labels,
     int? order,
@@ -36,20 +37,29 @@ class Task with _$Task {
 }
 
 @freezed
-class Due with _$Due {
-  const factory Due({
+class TaskDue with _$TaskDue {
+  const factory TaskDue({
     String? date,
     bool? isRecurring,
-    String? datetime,
+    DateTime? datetime,
     String? string,
     String? timezone,
-  }) = _Due;
+  }) = _TaskDue;
 }
 
 @freezed
-class Duration with _$Duration {
-  const factory Duration({
+class TaskDuration with _$TaskDuration {
+  const factory TaskDuration({
     int? amount,
-    String? unit,
-  }) = _Duration;
+    DurationUnit? unit,
+  }) = _TaskDuration;
+}
+
+enum DurationUnit {
+  minute,
+  day,
+  ;
+
+  static DurationUnit? fromName(String? value) =>
+      DurationUnit.values.byNameOrNull(value);
 }

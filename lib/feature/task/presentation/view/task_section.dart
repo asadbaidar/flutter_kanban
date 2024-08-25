@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 final _pageKey = PageViewKey();
 const _horizontalPadding = 16.0;
 const _viewportFraction = 0.9;
-const _itemHeight = 80.0;
+const _itemHeight = 113.0;
 
-class TaskView extends StatelessWidget {
-  const TaskView({super.key});
+class TaskSectionView extends StatelessWidget {
+  const TaskSectionView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class TaskView extends StatelessWidget {
             message: data.errorMessage,
             onRetry: () => context.read<TaskBloc>().getTasks(),
           ),
-          otherwise: (data) => _SectionBuilder(
+          otherwise: (data) => _TaskSectionBuilder(
             sectionTasks: state.sectionTasks,
           ),
         );
@@ -33,8 +33,8 @@ class TaskView extends StatelessWidget {
   }
 }
 
-class _SectionBuilder extends StatelessWidget {
-  const _SectionBuilder({required this.sectionTasks});
+class _TaskSectionBuilder extends StatelessWidget {
+  const _TaskSectionBuilder({required this.sectionTasks});
 
   final SectionTasks sectionTasks;
 
@@ -86,7 +86,7 @@ class _TaskSectionPageView extends StatelessWidget {
             scrollController: _pageKey.controller,
             items: tasks,
             onAccept: (task) =>
-                context.read<TaskBloc>().moveToSection(section, task: task),
+                context.read<TaskBloc>().moveTask(task, toSection: section.id!),
             child: TaskListView(
               items: tasks,
               section: section,

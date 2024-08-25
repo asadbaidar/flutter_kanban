@@ -11,7 +11,7 @@ class ProjectView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBottomSheet(
       title: LocaleStrings.selectProject,
-      content: const _ProjectBody(),
+      body: const _ProjectBody(),
     );
   }
 }

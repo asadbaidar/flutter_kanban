@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:locale/locale.dart';
 
 final _dragKey = GlobalKey();
@@ -44,11 +45,13 @@ class TaskListView extends StatelessWidget {
               section: section,
               item: item,
               size: itemSize,
-              loading: state.isMoveInProgress(item),
+              loading: state.isTaskMoveing(item),
               dragging: item == draggingItem,
               dragKey: _dragKey,
               onDragStart: onDragStart,
               onDragEnd: onDragEnd,
+              onTap: () => context
+                  .go(TaskFormPage.route(context.currentRoute, id: item.id)),
             );
           },
         );

@@ -10,13 +10,11 @@ class TaskDtoEntity {
     this.content,
     this.description,
     this.sectionId,
-    this.order,
     this.labels,
     this.priority,
     this.dueString,
     this.dueDate,
     this.dueDatetime,
-    this.dueLang,
     this.assigneeId,
     this.duration,
     this.durationUnit,
@@ -30,32 +28,28 @@ class TaskDtoEntity {
       content: model.content,
       description: model.description,
       sectionId: model.sectionId,
-      order: model.order,
       labels: model.labels,
       priority: model.priority,
       dueString: model.dueString,
       dueDate: model.dueDate,
-      dueDatetime: model.dueDatetime,
-      dueLang: model.dueLang,
+      dueDatetime: model.dueDatetime?.toIso8601String(),
       assigneeId: model.assigneeId,
-      duration: model.duration,
-      durationUnit: model.durationUnit,
+      duration: model.duration?.toIntOrNull(),
+      durationUnit: model.durationUnit?.name,
     );
   }
 
   final String? content;
   final String? description;
   final String? sectionId;
-  final int? order;
   final List<String>? labels;
   final int? priority;
   final String? dueString;
   final String? dueDate;
   final String? dueDatetime;
-  final String? dueLang;
   final String? assigneeId;
   final int? duration;
   final String? durationUnit;
 
-  Map<String, dynamic> toJson() => _$TaskDtoEntityToJson(this).nonBlankValues;
+  Map<String, dynamic> toJson() => _$TaskDtoEntityToJson(this);
 }

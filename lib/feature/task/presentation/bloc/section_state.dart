@@ -20,3 +20,8 @@ extension SectionStateValues on SectionState {
 
   List<Section> get sections => sectionDataState.value ?? [];
 }
+
+extension GetSectionById on List<Section> {
+  Section? getById(String? id) =>
+      firstWhereOrNull((element) => element.id == id);
+}

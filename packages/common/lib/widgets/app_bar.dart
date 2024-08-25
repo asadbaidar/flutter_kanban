@@ -204,12 +204,16 @@ class _PopButton extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       child: CustomIconButton(
         tooltip: tooltip,
-        onPressed: onPressed ??
-            () => context
-              ..unfocus()
-              ..pop(),
-        icon: AssetIcon.monotone(icon),
         color: color,
+        icon: AssetIcon.monotone(icon),
+        onPressed: () {
+          context.unfocus();
+          if (onPressed != null) {
+            onPressed!();
+          } else {
+            context.pop();
+          }
+        },
       ),
     );
   }
@@ -227,13 +231,30 @@ class CustomDoneAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomActionButton.bold(
+    return CustomPopAction.bold(
       enabled: enabled,
       text: LocaleStrings.done,
-      onPressed: onPressed ??
-          () => context
-            ..unfocus()
-            ..pop(),
+      onPressed: onPressed,
+    );
+  }
+}
+
+class CustomSaveAction extends StatelessWidget {
+  const CustomSaveAction({
+    super.key,
+    this.enabled = true,
+    this.onPressed,
+  });
+
+  final bool enabled;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPopAction.bold(
+      enabled: enabled,
+      text: LocaleStrings.save,
+      onPressed: onPressed,
     );
   }
 }
@@ -250,13 +271,73 @@ class CustomCancelAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomActionButton(
+    return CustomPopAction(
       enabled: enabled,
       text: LocaleStrings.cancel,
-      onPressed: onPressed ??
-          () => context
-            ..unfocus()
-            ..pop(),
+      onPressed: onPressed,
+    );
+  }
+}
+
+class CustomCloseAction extends StatelessWidget {
+  const CustomCloseAction({
+    super.key,
+    this.enabled = true,
+    this.onPressed,
+  });
+
+  final bool enabled;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPopAction(
+      enabled: enabled,
+      text: MaterialLocalizations.of(context).closeButtonLabel,
+      onPressed: onPressed,
+    );
+  }
+}
+
+class CustomPopAction extends StatelessWidget {
+  const CustomPopAction({
+    super.key,
+    required this.text,
+    this.enabled = true,
+    this.loading = false,
+    this.bold = false,
+    this.onPressed,
+  });
+
+  const CustomPopAction.bold({
+    super.key,
+    required this.text,
+    this.enabled = true,
+    this.loading = false,
+    this.onPressed,
+  }) : bold = true;
+
+  final String? text;
+  final bool enabled;
+  final bool loading;
+  final bool bold;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomActionButton(
+      enabled: enabled,
+      text: text,
+      loading: loading,
+      bold: bold,
+      onPressed: () {
+        context.unfocus();
+        if (onPressed != null) {
+          onPressed!();
+        } else {
+          context.pop();
+        }
+      },
     );
   }
 }
@@ -282,10 +363,14 @@ class CustomApplyButton extends StatelessWidget {
       text: LocaleStrings.apply,
       width: width,
       padding: padding,
-      onPressed: onPressed ??
-          () => context
-            ..unfocus()
-            ..pop(),
+      onPressed: () {
+        context.unfocus();
+        if (onPressed != null) {
+          onPressed!();
+        } else {
+          context.pop();
+        }
+      },
     );
   }
 }
@@ -311,10 +396,14 @@ class CustomCancelButton extends StatelessWidget {
       text: LocaleStrings.cancel,
       width: width,
       padding: padding,
-      onPressed: onPressed ??
-          () => context
-            ..unfocus()
-            ..pop(),
+      onPressed: () {
+        context.unfocus();
+        if (onPressed != null) {
+          onPressed!();
+        } else {
+          context.pop();
+        }
+      },
     );
   }
 }

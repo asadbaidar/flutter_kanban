@@ -17,6 +17,12 @@ class AppRoutes {
               path: ProjectPage.subroute(),
               pageBuilder: (_, __) => const ProjectPage(),
             ),
+            GoRoute(
+              path: TaskFormPage.subroute(),
+              pageBuilder: (_, state) => TaskFormPage(
+                id: state.uri.queryParameters['id'],
+              ),
+            ),
           ],
         ),
       ];

@@ -300,6 +300,7 @@ class CustomIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final iconTheme = IconTheme.of(context);
     return CustomInkWell(
       onTap: enabled ? onPressed : null,
       color: backgroundColor ?? (floating ? context.surface : null),
@@ -317,9 +318,9 @@ class CustomIconButton extends StatelessWidget {
       borderRadius: borderRadius ?? (circle ? size : 10),
       child: Center(
         child: IconTheme(
-          data: context.iconTheme.copyWith(
+          data: iconTheme.copyWith(
             size: iconSize,
-            color: color,
+            color: enabled ? color : (color ?? iconTheme.color)?.disabled,
           ),
           child: icon,
         ),
@@ -404,10 +405,11 @@ class CustomActionButton extends StatelessWidget {
     this.color,
     this.pressedOpacity = 0.4,
     this.padding,
+    this.bold = false,
     this.loading = false,
     this.enabled = true,
     this.onPressed,
-  }) : bold = false;
+  });
 
   const CustomActionButton.bold({
     super.key,
@@ -426,9 +428,9 @@ class CustomActionButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Widget? icon;
   final Color? color;
-  final bool bold;
   final double? pressedOpacity;
   final EdgeInsetsGeometry? padding;
+  final bool bold;
   final bool loading;
   final bool enabled;
   final VoidCallback? onPressed;
@@ -436,7 +438,7 @@ class CustomActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = this.color ?? context.secondary;
-    final foreground = enabled ? color : color.focused;
+    final foreground = enabled ? color : color.disabled;
     if (loading) return CustomProgress.small(color: color);
 
     return CustomInkWell(
@@ -531,29 +533,39 @@ class CustomMenuItemView extends StatelessWidget {
   }
 }
 
-class ColoredTagView extends StatelessWidget {
-  const ColoredTagView({
+class CustomTagView extends StatelessWidget {
+  const CustomTagView({
     super.key,
     this.text,
+    this.trailing,
     this.foreground,
     this.background,
     this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-    this.margin = EdgeInsets.zero,
+    this.margin,
+    this.enabled = true,
+    this.onTap,
   });
 
-  const ColoredTagView.margined({
+  const CustomTagView.dropDown({
     super.key,
     this.text,
+    this.trailing = const Icon(Icons.expand_more),
     this.foreground,
     this.background,
-    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-  }) : margin = const EdgeInsets.only(bottom: 12);
+    this.padding = const EdgeInsetsDirectional.fromSTEB(11, 4, 7, 4),
+    this.margin,
+    this.enabled = true,
+    this.onTap,
+  });
 
   final String? text;
+  final Widget? trailing;
   final Color? foreground;
   final Color? background;
   final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry? margin;
+  final bool enabled;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -563,9 +575,23 @@ class ColoredTagView extends StatelessWidget {
       borderRadius: 4,
       padding: padding,
       margin: margin,
-      child: Text(
-        text ?? '',
-        style: context.labelLarge?.withColor(color),
+      enabled: enabled,
+      onTap: onTap,
+      child: DefaultTextStyle(
+        style: (context.labelLarge ?? const TextStyle()).withColor(color),
+        child: IconTheme(
+          data: IconTheme.of(context).copyWith(color: color, size: 20),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(text ?? ''),
+              if (trailing != null) ...[
+                const SizedBox(width: 6),
+                trailing!,
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/project/domain/domain.dart';
 import 'package:core/feature/task/task.dart';
 
-class TaskBloc extends Cubit<TaskState> {
+class TaskBloc extends Cubit<TaskState> with SafeBloc {
   TaskBloc({required this.taskRepository}) : super(const TaskState());
 
   final TaskRepository taskRepository;
@@ -22,30 +22,39 @@ class TaskBloc extends Cubit<TaskState> {
 
     if (previous != project) getTasks();
   }
+}
 
-  void onDragStart(Task task) {
-    emit(state.copyWith(draggingTask: task));
+extension TaskUpdateBloc on TaskBloc {
+  void addTask(Task task) {
+    emit(
+      state.copyWith(
+        taskDataState: state.taskDataState.copyWith(
+          value: TaskData(all: state.sectionTasks.addTask(task)),
+        ),
+      ),
+    );
   }
 
-  void onDragEnd() {
-    emit(state.copyWith(draggingTask: null));
+  void updateTask(Task task) {
+    emit(
+      state.copyWith(
+        taskDataState: state.taskDataState.copyWith(
+          value: TaskData(
+            all: state.sectionTasks.removeTask(task).addTask(task),
+          ),
+        ),
+      ),
+    );
   }
 
-  Future<void> moveToSection(Section section, {required Task task}) async {
-    final sourceSectionId = task.sectionId!;
-    final targetSectionId = section.id!;
+  Future<void> moveTask(Task task, {required String toSection}) async {
     final taskId = task.id!;
+    final targetSectionId = toSection;
     final backup = state.sectionTasks;
 
-    final update = {...state.sectionTasks};
-    final sourceSection = update[sourceSectionId] ?? [];
-    final targetSection = update[targetSectionId] ?? [];
-    if (sourceSection.isEmpty) return;
-
-    sourceSection.remove(task);
-    targetSection.add(task.copyWith(sectionId: targetSectionId));
-    update[sourceSectionId] = sourceSection;
-    update[targetSectionId] = targetSection;
+    final update = state.sectionTasks
+        .removeTask(task)
+        .addTask(task, toSection: targetSectionId);
 
     emit(
       state.copyWith(
@@ -72,5 +81,13 @@ class TaskBloc extends Cubit<TaskState> {
         ),
       );
     }
+  }
+
+  void onDragStart(Task task) {
+    emit(state.copyWith(draggingTask: task));
+  }
+
+  void onDragEnd() {
+    emit(state.copyWith(draggingTask: null));
   }
 }

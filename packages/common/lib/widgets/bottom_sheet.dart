@@ -9,13 +9,11 @@ class CustomBottomSheet extends StatelessWidget {
     this.title,
     this.customTitle,
     this.header,
-    this.content,
+    this.body,
     this.stretch = true,
     this.loading = false,
-    this.canDone = true,
-    this.canApply = true,
-    this.onDone,
-    this.onApply,
+    this.leadingAction,
+    this.trailingAction,
     this.crossAxisAlignment,
   });
 
@@ -24,13 +22,11 @@ class CustomBottomSheet extends StatelessWidget {
   final String? title;
   final Widget? customTitle;
   final Widget? header;
-  final Widget? content;
+  final Widget? body;
   final bool stretch;
   final bool loading;
-  final bool canDone;
-  final bool canApply;
-  final VoidCallback? onDone;
-  final VoidCallback? onApply;
+  final Widget? leadingAction;
+  final Widget? trailingAction;
   final CrossAxisAlignment? crossAxisAlignment;
 
   @override
@@ -40,17 +36,15 @@ class CustomBottomSheet extends StatelessWidget {
       mainAxisSize: stretch ? MainAxisSize.max : MainAxisSize.min,
       children: [
         if (showDragHandle) dragHandle,
-        if (onDone != null)
+        if (trailingAction != null || leadingAction != null)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CustomCancelAction(),
-                CustomDoneAction(
-                  enabled: canDone,
-                  onPressed: onDone,
-                ),
+                leadingAction ?? const CustomCancelAction(),
+                if (trailingAction != null) trailingAction!,
               ],
             ),
           ),
@@ -67,36 +61,7 @@ class CustomBottomSheet extends StatelessWidget {
           )
         else ...[
           if (header != null) header!,
-          if (content != null) stretch ? Expanded(child: content!) : content!,
-          if (onApply != null) ...[
-            const Divider(),
-            SafeArea(
-              top: false,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CustomCancelButton(
-                      padding: EdgeInsets.zero,
-                      width: 130,
-                    ),
-                    const SizedBox(width: 8),
-                    CustomApplyButton(
-                      enabled: canApply,
-                      onPressed: onApply,
-                      padding: EdgeInsets.zero,
-                      width: 130,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-          if (!stretch) const SizedBox(height: 16),
+          if (body != null) stretch ? Expanded(child: body!) : body!,
         ],
       ],
     );
@@ -108,10 +73,12 @@ class CustomDragHandle extends StatelessWidget {
     super.key,
     this.color,
     this.size,
+    this.padding = const EdgeInsets.symmetric(vertical: 16),
   });
 
   final Color? color;
   final Size? size;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +91,8 @@ class CustomDragHandle extends StatelessWidget {
         bottomSheetTheme.dragHandleColor ??
         Theme.of(context).colorScheme.outline;
 
-    return Container(
-      padding: const EdgeInsets.only(top: 16, bottom: 24),
-      width: double.infinity,
+    return Padding(
+      padding: padding,
       child: Center(
         child: Container(
           height: handleSize.height,

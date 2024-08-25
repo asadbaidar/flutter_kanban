@@ -24,6 +24,31 @@ extension TaskStateValues on TaskState {
 
   SectionTasks get sectionTasks => taskDataState.value?.all ?? {};
 
-  bool isMoveInProgress(Task task) =>
+  bool isTaskMoveing(Task task) =>
       taskMoveState.key == task.id && taskMoveState.isLoading;
+}
+
+extension TaskUpdateState on SectionTasks {
+  SectionTasks removeTask(Task task, {String? fromSection}) {
+    final update = {...this};
+    final sectionId = fromSection ?? task.sectionId ?? '';
+    final section = update[sectionId] ?? [];
+    section.removeWhere((t) => t.id == task.id);
+    update[sectionId] = section;
+    return update;
+  }
+
+  SectionTasks addTask(Task task, {String? toSection}) {
+    final update = {...this};
+    final sectionId = toSection ?? task.sectionId ?? '';
+    final section = update[sectionId] ?? [];
+    section.add(task.copyWith(sectionId: sectionId));
+    update[sectionId] = section;
+    return update;
+  }
+
+  Task? getById(String? id) => values.fold<Task?>(
+        null,
+        (task, tasks) => task ?? tasks.firstWhereOrNull((t) => t.id == id),
+      );
 }

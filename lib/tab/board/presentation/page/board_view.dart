@@ -11,6 +11,7 @@ class BoardView extends StatelessWidget {
     return const Scaffold(
       appBar: CustomAppBar(
         customTitle: TitleView(),
+        actions: [TaskSyncButton()],
       ),
       body: _BoardBody(),
     );
@@ -22,6 +23,6 @@ class _BoardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TaskView();
+    return const TaskSectionView();
   }
 }

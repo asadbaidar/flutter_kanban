@@ -1,6 +1,7 @@
 import 'package:common/common.dart';
-import 'package:core/feature/project/presentation/page/page.dart';
-import 'package:core/tab/tab/presentation/page/page.dart';
+import 'package:core/feature/project/project.dart';
+import 'package:core/feature/task/task.dart';
+import 'package:core/tab/tab/tab.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';

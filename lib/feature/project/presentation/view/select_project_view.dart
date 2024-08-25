@@ -23,6 +23,7 @@ class SelectProjectView extends StatelessWidget {
                 child: CustomProgress.small(centered: false),
               ),
               otherwise: (_) => Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     state.selectedOrFirst?.name ?? LocaleStrings.selectProject,

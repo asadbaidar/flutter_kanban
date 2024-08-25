@@ -52,10 +52,12 @@ class DialogTextAction extends StatelessWidget {
   const DialogTextAction(
     this.text, {
     super.key,
+    this.pop = true,
     this.onPressed,
   });
 
   final String text;
+  final bool pop;
   final VoidCallback? onPressed;
 
   @override
@@ -74,7 +76,7 @@ class DialogSaveAction extends DialogTextAction {
   DialogSaveAction({
     super.key,
     super.onPressed,
-  }) : super(LocaleStrings.save);
+  }) : super(LocaleStrings.save, pop: false);
 }
 
 class DialogDiscardAction extends DialogTextAction {
@@ -82,6 +84,13 @@ class DialogDiscardAction extends DialogTextAction {
     super.key,
     super.onPressed,
   }) : super(LocaleStrings.discard);
+}
+
+class DialogContinueAction extends DialogTextAction {
+  const DialogContinueAction({
+    super.key,
+    super.onPressed,
+  }) : super('Continue');
 }
 
 class DialogCancelAction extends DialogTextAction {
@@ -102,15 +111,28 @@ class DialogYesAction extends DialogTextAction {
   DialogYesAction({
     super.key,
     super.onPressed,
-  }) : super(LocaleStrings.yes);
+  }) : super(LocaleStrings.yes, pop: false);
 }
 
-class SaveConfirmationDialog extends StatelessWidget {
-  const SaveConfirmationDialog({
+class ConfirmSaveDialog extends StatelessWidget {
+  const ConfirmSaveDialog({
     this.onSave,
     this.onDiscard,
     super.key,
   });
+
+  static void show(
+    BuildContext context, {
+    VoidCallback? onSave,
+    VoidCallback? onDiscard,
+  }) =>
+      showDialog<void>(
+        context: context,
+        builder: (_) => ConfirmSaveDialog(
+          onSave: onSave,
+          onDiscard: onDiscard,
+        ),
+      );
 
   final VoidCallback? onSave;
   final VoidCallback? onDiscard;
@@ -124,6 +146,43 @@ class SaveConfirmationDialog extends StatelessWidget {
       actions: [
         DialogDiscardAction(onPressed: onDiscard),
         DialogSaveAction(onPressed: onSave),
+      ],
+    );
+  }
+}
+
+class ConfirmDiscardDialog extends StatelessWidget {
+  const ConfirmDiscardDialog({
+    this.onContinue,
+    this.onDiscard,
+    super.key,
+  });
+
+  static void show(
+    BuildContext context, {
+    VoidCallback? onContinue,
+    VoidCallback? onDiscard,
+  }) =>
+      showDialog<void>(
+        context: context,
+        builder: (_) => ConfirmDiscardDialog(
+          onContinue: onContinue,
+          onDiscard: onDiscard,
+        ),
+      );
+
+  final VoidCallback? onContinue;
+  final VoidCallback? onDiscard;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAlertDialog(
+      dismissible: false,
+      title: 'Discard Changes',
+      message: 'Are you sure you want to discard your changes?',
+      actions: [
+        DialogDiscardAction(onPressed: onDiscard),
+        DialogContinueAction(onPressed: onContinue),
       ],
     );
   }

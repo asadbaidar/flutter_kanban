@@ -21,7 +21,7 @@ class SectionCard extends StatelessWidget {
         title: Text(section.name ?? ''),
         titleTextStyle: context.title2?.w700,
         trailing: count > 0
-            ? ColoredTagView(
+            ? CustomTagView(
                 text: count.toString(),
                 foreground: section.color(context),
               )

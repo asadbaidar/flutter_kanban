@@ -1,4 +1,5 @@
 import 'package:common/common.dart';
+import 'package:core/feature/task/task.dart';
 import 'package:core/tab/tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +15,7 @@ class TabView extends StatelessWidget {
         final tab = context.newTab;
         if (tab != null) context.read<TabCubit>().changeTab(tab);
       },
-      child: const SmartCupertinoScafold(
-        body: _TabScafold(),
-      ),
+      child: const _TabScafold(),
     );
   }
 }
@@ -38,7 +37,7 @@ class _TabScafold extends StatelessWidget {
                   .read<TabCubit>()
                   .changeTab(tab, router: context.router),
             ),
-            floatingActionButton: const CreateTaskButton(),
+            floatingActionButton: const TaskCreateButton(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
           );
@@ -63,19 +62,5 @@ class _TabBody extends StatelessWidget {
       default:
         return const SizedBox.shrink();
     }
-  }
-}
-
-class CreateTaskButton extends StatelessWidget {
-  const CreateTaskButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {},
-      child: const Icon(Icons.add),
-    );
   }
 }

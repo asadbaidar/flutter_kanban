@@ -60,8 +60,8 @@ class TaskEntity implements ToModel<Task> {
   final bool? isCompleted;
   final String? content;
   final String? description;
-  final DueEntity? due;
-  final DurationEntity? duration;
+  final TaskDueEntity? due;
+  final TaskDurationEntity? duration;
   final String? id;
   final List<String>? labels;
   final int? order;
@@ -97,8 +97,8 @@ class TaskEntity implements ToModel<Task> {
 }
 
 @JsonSerializable()
-class DueEntity implements ToModel<Due> {
-  DueEntity({
+class TaskDueEntity implements ToModel<TaskDue> {
+  TaskDueEntity({
     this.date,
     this.isRecurring,
     this.datetime,
@@ -106,8 +106,8 @@ class DueEntity implements ToModel<Due> {
     this.timezone,
   });
 
-  factory DueEntity.fromJson(Map<String, dynamic> json) =>
-      _$DueEntityFromJson(json);
+  factory TaskDueEntity.fromJson(Map<String, dynamic> json) =>
+      _$TaskDueEntityFromJson(json);
 
   final String? date;
   final bool? isRecurring;
@@ -115,36 +115,36 @@ class DueEntity implements ToModel<Due> {
   final String? string;
   final String? timezone;
 
-  Map<String, dynamic> toJson() => _$DueEntityToJson(this);
+  Map<String, dynamic> toJson() => _$TaskDueEntityToJson(this);
 
   @override
-  Due toModel() => Due(
+  TaskDue toModel() => TaskDue(
         date: date,
         isRecurring: isRecurring,
-        datetime: datetime,
+        datetime: DateTime.tryParse(datetime ?? ''),
         string: string,
         timezone: timezone,
       );
 }
 
 @JsonSerializable()
-class DurationEntity implements ToModel<Duration> {
-  DurationEntity({
+class TaskDurationEntity implements ToModel<TaskDuration> {
+  TaskDurationEntity({
     this.amount,
     this.unit,
   });
 
-  factory DurationEntity.fromJson(Map<String, dynamic> json) =>
-      _$DurationEntityFromJson(json);
+  factory TaskDurationEntity.fromJson(Map<String, dynamic> json) =>
+      _$TaskDurationEntityFromJson(json);
 
   final int? amount;
   final String? unit;
 
-  Map<String, dynamic> toJson() => _$DurationEntityToJson(this);
+  Map<String, dynamic> toJson() => _$TaskDurationEntityToJson(this);
 
   @override
-  Duration toModel() => Duration(
+  TaskDuration toModel() => TaskDuration(
         amount: amount,
-        unit: unit,
+        unit: DurationUnit.fromName(unit),
       );
 }
