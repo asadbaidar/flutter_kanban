@@ -22,14 +22,14 @@ class TabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TabCubit(initialTab: _tab),
+      create: (context) => TabBloc(initialTab: _tab),
       child: const TabView(),
     );
   }
 }
 
 extension TabContext on BuildContext {
-  TabItem get currentTab => read<TabCubit>().state.currentTab;
+  TabItem get currentTab => read<TabBloc>().state.currentTab;
 
   TabItem? get newTab => TabItem.fromName(routePathParameters['page']);
 }

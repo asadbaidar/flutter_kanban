@@ -13,7 +13,7 @@ class TabView extends StatelessWidget {
       key: ValueKey(context.newTab),
       onInit: () {
         final tab = context.newTab;
-        if (tab != null) context.read<TabCubit>().changeTab(tab);
+        if (tab != null) context.read<TabBloc>().changeTab(tab);
       },
       child: const _TabScafold(),
     );
@@ -27,14 +27,14 @@ class _TabScafold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: context.bottomNavigationBarTheme,
-      child: BlocBuilder<TabCubit, TabState>(
+      child: BlocBuilder<TabBloc, TabState>(
         builder: (context, state) {
           return Scaffold(
             body: _TabBody(state.currentTab),
             bottomNavigationBar: BottomNavBar(
               currentTab: state.currentTab,
               onSelect: (tab) => context
-                  .read<TabCubit>()
+                  .read<TabBloc>()
                   .changeTab(tab, router: context.router),
             ),
             floatingActionButton: const TaskCreateButton(),
