@@ -1,6 +1,8 @@
 import 'package:common/common.dart';
 import 'package:core/feature/project/project.dart';
+import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locale/locale.dart';
 
 class TitleView extends StatelessWidget {
@@ -8,11 +10,18 @@ class TitleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomListTile(
-      title: LocaleStrings.appName,
-      titleStyle: context.logo,
-      titleMaxLines: 1,
-      customSubtitle: const SelectProjectView(),
+    return MultiBlocListener(
+      listeners: const [
+        ProjectListener(),
+        TaskCloseListener(),
+        TaskReopenListener(),
+      ],
+      child: CustomListTile(
+        title: LocaleStrings.appName,
+        titleStyle: context.logo,
+        titleMaxLines: 1,
+        customSubtitle: const SelectProjectView(),
+      ),
     );
   }
 }

@@ -40,14 +40,9 @@ class _TaskSectionView extends StatelessWidget {
     return LifecycleObserver(
       onInit: () =>
           context.read<TaskFormBloc>().initSectionId(sections.firstOrNull?.id),
-      child: Row(
-        children: [
-          _TaskSectionDropDown(
-            sections: sections,
-            enabled: !loading,
-          ),
-          if (loading) const CustomProgress.small(),
-        ],
+      child: _TaskSectionDropDown(
+        sections: sections,
+        loading: loading,
       ),
     );
   }
@@ -56,11 +51,11 @@ class _TaskSectionView extends StatelessWidget {
 class _TaskSectionDropDown extends StatelessWidget {
   const _TaskSectionDropDown({
     required this.sections,
-    this.enabled = true,
+    this.loading = false,
   });
 
   final List<Section> sections;
-  final bool enabled;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +66,8 @@ class _TaskSectionDropDown extends StatelessWidget {
         return CustomTagView.dropDown(
           text: section?.name ?? 'Section',
           foreground: section?.color(context),
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          enabled: enabled,
+          enabled: !loading,
+          loading: loading,
           onTap: () => _showDropDown(
             context,
             selected: state.sectionId.value,

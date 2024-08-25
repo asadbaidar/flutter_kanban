@@ -21,7 +21,7 @@ class CommentEntity implements ToModel<Comment> {
   factory CommentEntity.fromModel(Comment model) => CommentEntity(
         content: model.content,
         id: model.id,
-        postedAt: model.postedAt?.toIso8601String(),
+        postedAt: model.postedAt?.toUtc().toIso8601String(),
         projectId: model.projectId,
         taskId: model.taskId,
         attachment: $mapTo(model.attachment, AttachmentEntity.fromModel),
@@ -40,7 +40,7 @@ class CommentEntity implements ToModel<Comment> {
   Comment toModel() => Comment(
         content: content,
         id: id,
-        postedAt: DateTime.tryParse(postedAt ?? ''),
+        postedAt: DateTime.tryParse(postedAt ?? '')?.toLocal(),
         projectId: projectId,
         taskId: taskId,
         attachment: attachment?.toModel(),

@@ -121,7 +121,7 @@ class TaskDueEntity implements ToModel<TaskDue> {
   TaskDue toModel() => TaskDue(
         date: date,
         isRecurring: isRecurring,
-        datetime: DateTime.tryParse(datetime ?? ''),
+        datetime: DateTime.tryParse(datetime ?? '')?.toLocal(),
         string: string,
         timezone: timezone,
       );

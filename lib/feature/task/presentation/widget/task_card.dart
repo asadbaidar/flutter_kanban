@@ -107,6 +107,7 @@ class TaskItemCard extends StatelessWidget {
                   ),
                 ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (completed)
                       const Icon(Icons.expand_more)
@@ -116,7 +117,9 @@ class TaskItemCard extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.only(top: 4),
                         child: CustomProgress.small(),
-                      ),
+                      )
+                    else
+                      const SizedBox.square(dimension: 22),
                   ],
                 ),
               ],

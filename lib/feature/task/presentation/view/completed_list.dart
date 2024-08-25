@@ -1,11 +1,11 @@
 import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locale/locale.dart';
 
-class CompletedTaskListView extends StatelessWidget {
-  const CompletedTaskListView({super.key});
+class CompletedTaskView extends StatelessWidget {
+  const CompletedTaskView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +73,41 @@ class _CompletedList extends StatelessWidget {
       footerBuilder: (_) => const SizedBox(height: 40),
       items: items,
       itemBuilder: (context, index, item) {
-        return TaskCompletedCard(
+        return _CompletedItem(
           item: item!,
-          section: sections.getById(item.sectionId),
-          // loading: for action
-          // onTap: reppon action
+          sections: sections,
         );
       },
+    );
+  }
+}
+
+class _CompletedItem extends StatelessWidget {
+  const _CompletedItem({
+    required this.item,
+    required this.sections,
+  });
+
+  final CompletedTask item;
+  final List<Section> sections;
+
+  @override
+  Widget build(BuildContext context) {
+    final isReopening = context.select(
+      (TaskCompletedBloc bloc) => bloc.state.isTaskReopening(item.taskId!),
+    );
+    return TaskCompletedCard(
+      item: item,
+      section: sections.getById(item.sectionId),
+      loading: isReopening,
+      onTap: () => showCupertinoModalPopup<void>(
+        context: context,
+        builder: (context) => TaskActionSheet(
+          action: 'Reopen',
+          onAction: () =>
+              context.read<TaskCompletedBloc>().reopenTask(item.taskId!),
+        ),
+      ),
     );
   }
 }

@@ -32,7 +32,7 @@ class TaskDtoEntity {
       priority: model.priority,
       dueString: model.dueString,
       dueDate: model.dueDate,
-      dueDatetime: model.dueDatetime?.toIso8601String(),
+      dueDatetime: model.dueDatetime?.toUtc().toIso8601String(),
       assigneeId: model.assigneeId,
       duration: model.duration?.toIntOrNull(),
       durationUnit: model.durationUnit?.name,

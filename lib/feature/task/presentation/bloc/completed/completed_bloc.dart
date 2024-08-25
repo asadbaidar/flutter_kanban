@@ -3,7 +3,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/project/domain/domain.dart';
 import 'package:core/feature/task/task.dart';
 
-class TaskCompletedBloc extends Cubit<TaskCompletedState> {
+class TaskCompletedBloc extends Cubit<TaskCompletedState> with SafeBloc {
   TaskCompletedBloc({required this.taskRepository})
       : super(const TaskCompletedState());
 
@@ -24,4 +24,18 @@ class TaskCompletedBloc extends Cubit<TaskCompletedState> {
 
     if (previous != project) getCompletedTasks();
   }
+}
+
+extension TaskOpenCloseBloc on TaskCompletedBloc {
+  Future<void> reopenTask(String id) => when(
+        state.reopenState.copyWith(key: id),
+        act: () => taskRepository.reopenTask(id),
+        emit: (value) => emit(state.copyWith(reopenState: value)),
+      );
+
+  Future<void> closeTask(String id) => when(
+        state.closeState.copyWith(key: id),
+        act: () => taskRepository.closeTask(id),
+        emit: (value) => emit(state.copyWith(closeState: value)),
+      );
 }

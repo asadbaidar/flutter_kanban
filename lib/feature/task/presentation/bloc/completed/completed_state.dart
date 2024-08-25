@@ -6,11 +6,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'completed_state.freezed.dart';
 
 typedef TaskCompletedDataState = Data<List<CompletedTask>>;
+typedef TaskActionState = Data<void>;
 
 @freezed
 class TaskCompletedState with _$TaskCompletedState {
   const factory TaskCompletedState({
     @Default(TaskCompletedDataState()) TaskCompletedDataState dataState,
+    @Default(TaskActionState()) TaskActionState reopenState,
+    @Default(TaskActionState()) TaskActionState closeState,
     Project? project,
   }) = _TaskCompletedState;
 }
@@ -19,6 +22,11 @@ extension TaskCompletedStateValues on TaskCompletedState {
   String get projectId => project?.id ?? '';
 
   List<CompletedTask> get tasks => dataState.value ?? [];
+
+  bool isTaskReopening(String id) =>
+      reopenState.key == id && reopenState.isLoading;
+
+  bool isTaskClosing(String id) => closeState.key == id && closeState.isLoading;
 }
 
 extension GetCompletedTaskById on List<CompletedTask> {

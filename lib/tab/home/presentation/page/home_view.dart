@@ -11,7 +11,7 @@ class HomeView extends StatelessWidget {
     return const Scaffold(
       appBar: CustomAppBar(
         customTitle: TitleView(),
-        actions: [LocaleButton()],
+        actions: [LocaleButton(), TaskSyncButton()],
       ),
       body: _HomeBody(),
     );
@@ -23,6 +23,6 @@ class _HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CompletedTaskListView();
+    return const CompletedTaskView();
   }
 }

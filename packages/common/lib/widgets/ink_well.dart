@@ -543,6 +543,7 @@ class CustomTagView extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
     this.margin,
     this.enabled = true,
+    this.loading = false,
     this.onTap,
   });
 
@@ -555,6 +556,7 @@ class CustomTagView extends StatelessWidget {
     this.padding = const EdgeInsetsDirectional.fromSTEB(11, 4, 7, 4),
     this.margin,
     this.enabled = true,
+    this.loading = false,
     this.onTap,
   });
 
@@ -565,6 +567,7 @@ class CustomTagView extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry? margin;
   final bool enabled;
+  final bool loading;
   final VoidCallback? onTap;
 
   @override
@@ -587,7 +590,13 @@ class CustomTagView extends StatelessWidget {
               Text(text ?? ''),
               if (trailing != null) ...[
                 const SizedBox(width: 6),
-                trailing!,
+                if (loading)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3),
+                    child: CustomProgress(size: 14),
+                  )
+                else
+                  trailing!,
               ],
             ],
           ),

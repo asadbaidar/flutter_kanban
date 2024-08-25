@@ -26,7 +26,7 @@ class CompletedTaskEntity implements ToModel<CompletedTask> {
   @override
   CompletedTask toModel() {
     return CompletedTask(
-      completedAt: DateTime.tryParse(completedAt ?? ''),
+      completedAt: DateTime.tryParse(completedAt ?? '')?.toLocal(),
       content: content,
       projectId: projectId,
       sectionId: sectionId,
