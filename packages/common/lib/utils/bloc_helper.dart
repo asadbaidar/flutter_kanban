@@ -3,7 +3,7 @@ import 'package:common/common.dart';
 
 typedef OnDataValue<V> = void Function(Data<V> data);
 
-extension CubitHelper<T> on BlocBase<T> {
+extension BlocHelper<T> on BlocBase<T> {
   Future<void> when<V>(
     Data<V> value, {
     required FutureCallback<V> act,
@@ -28,8 +28,10 @@ extension CubitHelper<T> on BlocBase<T> {
   }
 }
 
-extension MapHelper<K, V> on Map<K, V> {
-  R? get<R>(K key) => $cast(this[key]);
-
-  Map<K, V> copyWith(K key, V value) => {...this, key: value};
+mixin SafeBloc<T> on BlocBase<T> {
+  @override
+  void emit(T state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

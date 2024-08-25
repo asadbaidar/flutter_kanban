@@ -21,3 +21,9 @@ extension FromJsonArray on JsonArray {
   List<R>? mapJsonArray<R>(R Function(JsonObject it) apply) =>
       $cast<JsonArray>(this)?.map<R>((e) => apply(e as JsonObject)).toList();
 }
+
+extension MapHelper<K, V> on Map<K, V> {
+  R? get<R>(K key) => $cast(this[key]);
+
+  Map<K, V> copyWith(K key, V value) => {...this, key: value};
+}
