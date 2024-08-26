@@ -6,11 +6,9 @@ class TaskCompletedItem extends StatelessWidget {
   const TaskCompletedItem({
     super.key,
     required this.item,
-    required this.sections,
   });
 
   final TaskCompleted item;
-  final List<Section> sections;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,6 @@ class TaskCompletedItem extends StatelessWidget {
     );
     return TaskCompletedCard(
       item: item,
-      section: sections.getById(item.sectionId),
       loading: isReopening,
       onTap: () => showCupertinoModalPopup<void>(
         context: context,

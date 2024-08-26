@@ -5,13 +5,11 @@ class TaskCompletedCard extends StatelessWidget {
   const TaskCompletedCard({
     super.key,
     required this.item,
-    this.section,
     this.loading = false,
     this.onTap,
   });
 
   final TaskCompleted item;
-  final Section? section;
   final bool loading;
   final VoidCallback? onTap;
 
@@ -22,7 +20,6 @@ class TaskCompletedCard extends StatelessWidget {
       description: item.completedAtFormmated,
       maxLines: 3,
       completed: true,
-      color: section?.color(context),
       loading: loading,
       onTap: onTap,
     );

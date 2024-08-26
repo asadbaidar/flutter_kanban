@@ -31,7 +31,7 @@ class TaskItemCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         color: dragging
             ? context.surfaceDim
-            : (color ?? context.primary).withOpacity(0.1),
+            : color?.withOpacity(0.1) ?? context.surfaceContainer,
         margin: const EdgeInsets.symmetric(vertical: 4),
         child: CustomInkWell(
           onTap: onTap,

@@ -9,7 +9,6 @@ class TaskCompletedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = context.select((SectionBloc bloc) => bloc.state.sections);
     return BlocBuilder<TaskCompletedBloc, TaskCompletedState>(
       builder: (context, state) {
         return state.dataState.when(
@@ -26,10 +25,7 @@ class TaskCompletedView extends StatelessWidget {
                 emptyMessage: LocaleStrings.emptyMessage('completed'),
               );
             }
-            return TaskCompletedList(
-              items: items,
-              sections: sections,
-            );
+            return TaskCompletedList(items: items);
           },
         );
       },

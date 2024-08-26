@@ -6,11 +6,9 @@ class TaskCompletedList extends StatelessWidget {
   const TaskCompletedList({
     super.key,
     required this.items,
-    required this.sections,
   });
 
   final List<TaskCompleted> items;
-  final List<Section> sections;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +24,7 @@ class TaskCompletedList extends StatelessWidget {
       footerBuilder: (_) => const SizedBox(height: 40),
       items: items,
       itemBuilder: (context, index, item) {
-        return TaskCompletedItem(
-          item: item!,
-          sections: sections,
-        );
+        return TaskCompletedItem(item: item!);
       },
     );
   }
