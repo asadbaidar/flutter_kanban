@@ -3,24 +3,31 @@
 Flutter app for Kanban board to manage tasks using Todoist API.
 
 ## Getting Started
-Make sure you have following flutter/dart sdk installed on your machine. If not, follow the instructions [here](https://flutter.dev/docs/get-started/install).
+Make sure you have following or latest flutter/dart sdk installed on your machine. If not, follow the instructions [here](https://flutter.dev/docs/get-started/install).
 
 `flutter: 2.24.0`
 `dart: 3.5.0`
 
-To setup the project, use the following commands:
+## Setup
+1. Add your Todoist API token in `app/kanban/lib/environment.dart` file.
+
+```dart
+  static const apiToken = 'TODOIST_API_TOKEN';
+```
+
+2. To setup the project, use the following commands:
 ```sh
 $ flutter pub get
 $ dart run build_runner build --delete-conflicting-outputs
 ```
 
-To run the app, use the following commands:
+3. To run the app, use the following commands:
 ```sh
 $ cd app/kanban
 $ flutter run --flavor dev --target lib/main_dev.dart
 ```
 
-To generate the binaries, use the following commands:
+4. To generate the binaries, use the following commands:
 ```sh
 $ cd app/kanban
 $ flutter build apk --flavor dev --target lib/main_dev.dart

@@ -13,7 +13,7 @@ class AppEnvironment {
   static const host = 'https://api.todoist.com';
 
   /// Todoist api token
-  static const apiToken = '';
+  static const apiToken = 'TODOIST_API_TOKEN';
 
   /// The production environment
   static const prod = Environment(
