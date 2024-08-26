@@ -11,7 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.textStyle,
     this.hintStyle,
-    this.autocorrect = false,
+    this.autocorrect = true,
     this.enabled,
     this.readOnly = false,
     this.autofocus = false,
