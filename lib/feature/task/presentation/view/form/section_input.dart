@@ -13,7 +13,9 @@ class TaskSectionInput extends StatelessWidget {
         context.select(
           (TaskBloc bloc) => bloc.state.isTaskMoveing(task),
         );
-    return _TaskSectionView(loading: isMoving);
+    return TaskMoveListener(
+      child: _TaskSectionView(loading: isMoving),
+    );
   }
 }
 
