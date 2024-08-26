@@ -26,7 +26,7 @@ class _TabScafold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: context.bottomNavigationBarTheme,
+      data: context.surfaceContainerNavBarTheme,
       child: BlocBuilder<TabBloc, TabState>(
         builder: (context, state) {
           return Scaffold(

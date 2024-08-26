@@ -100,13 +100,6 @@ extension AppThemeContext on BuildContext {
   SystemUiOverlayStyle? get systemOverlayStyle =>
       appBarTheme.systemOverlayStyle;
 
-  SystemUiOverlayStyle? get transparentBars => systemOverlayStyle?.copyWith(
-        statusBarBrightness: theme.brightness.inverse,
-        statusBarIconBrightness: theme.brightness,
-        systemNavigationBarColor: scrim,
-        systemNavigationBarIconBrightness: theme.brightness,
-      );
-
   SystemUiOverlayStyle? get lightStatusBar => systemOverlayStyle?.copyWith(
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
@@ -117,19 +110,15 @@ extension AppThemeContext on BuildContext {
         statusBarIconBrightness: Brightness.light,
       );
 
-  ThemeData get transparentBarsTheme => theme.copyWith(
-        appBarTheme: appBarTheme.copyWith(
-          systemOverlayStyle: transparentBars,
-        ),
-      );
-
-  SystemUiOverlayStyle? get bottomNavigationBar => systemOverlayStyle?.copyWith(
+  SystemUiOverlayStyle? get surfaceContainerNavBar =>
+      systemOverlayStyle?.copyWith(
         systemNavigationBarColor: surfaceContainer,
       );
 
-  ThemeData get bottomNavigationBarTheme => theme.copyWith(
+  ThemeData get surfaceContainerNavBarTheme => theme.copyWith(
         appBarTheme: appBarTheme.copyWith(
-          systemOverlayStyle: bottomNavigationBar,
+          systemOverlayStyle: surfaceContainerNavBar,
         ),
       );
+
 }
