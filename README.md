@@ -18,9 +18,9 @@ Flutter app for Kanban board to manage tasks using Todoist API.
 | ![home](.content/home.png) | ![Board](.content/board.png) | ![Task](.content/task.png) |
 
 ## Screen records
-| Create | Edit | Complete |
-| --- | --- | --- |
-| [Create](.content/create.mov) | [Edit](.content/edit.mov) | [Complete](.content/complete.mov) |
+| Create | Edit | Comment | Complete |
+| --- | --- | --- | --- |
+| [Create](.content/create.mp4) | [Edit](.content/edit.mp4) | [Comment](.content/comment.mp4) | [Complete](.content/complete.mp4) |
 
 ## Pre-requisites
 Make sure you have following or latest flutter/dart sdk installed on your machine. If not, follow the instructions [here](https://flutter.dev/docs/get-started/install).
