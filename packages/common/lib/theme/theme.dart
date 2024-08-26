@@ -124,7 +124,7 @@ extension AppThemeContext on BuildContext {
       );
 
   SystemUiOverlayStyle? get bottomNavigationBar => systemOverlayStyle?.copyWith(
-        systemNavigationBarColor: primaryContainer,
+        systemNavigationBarColor: surfaceContainer,
       );
 
   ThemeData get bottomNavigationBarTheme => theme.copyWith(
