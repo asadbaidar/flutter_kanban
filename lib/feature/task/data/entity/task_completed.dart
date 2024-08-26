@@ -23,6 +23,8 @@ class TaskCompletedEntity implements ToModel<TaskCompleted> {
   final String? sectionId;
   final String? taskId;
 
+  Map<String, dynamic> toJson() => _$TaskCompletedEntityToJson(this);
+
   @override
   TaskCompleted toModel() {
     return TaskCompleted(
