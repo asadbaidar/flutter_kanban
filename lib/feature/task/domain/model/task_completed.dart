@@ -1,11 +1,11 @@
 import 'package:common/common.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'completed_task.freezed.dart';
+part 'task_completed.freezed.dart';
 
 @freezed
-class CompletedTask with _$CompletedTask {
-  const factory CompletedTask({
+class TaskCompleted with _$TaskCompleted {
+  const factory TaskCompleted({
     DateTime? completedAt,
     String? content,
     String? projectId,
@@ -14,12 +14,12 @@ class CompletedTask with _$CompletedTask {
   }) = _CompletedTask;
 }
 
-extension CompletedAtFormat on CompletedTask {
+extension CompletedAtFormat on TaskCompleted {
   String get completedAtFormmated =>
       'Completed at ${completedAt?.formatMMMdyHma}';
 }
 
-int taskByCompletion(CompletedTask a, CompletedTask b) {
+int taskByCompletion(TaskCompleted a, TaskCompleted b) {
   if (a.completedAt == null || b.completedAt == null) {
     return 0;
   }

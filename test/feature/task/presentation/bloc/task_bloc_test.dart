@@ -34,9 +34,9 @@ void main() {
       },
       act: (bloc) => bloc.getTasks(),
       expect: () => [
-        const TaskState(taskDataState: TaskDataState.loading()),
+        const TaskState(dataState: TaskDataState.loading()),
         const TaskState(
-          taskDataState: TaskDataState.loaded(
+          dataState: TaskDataState.loaded(
             value: TaskData(
               all: {
                 'section1': [Task(id: '1')],
@@ -56,9 +56,9 @@ void main() {
       },
       act: (bloc) => bloc.getTasks(),
       expect: () => [
-        const TaskState(taskDataState: TaskDataState.loading()),
+        const TaskState(dataState: TaskDataState.loading()),
         const TaskState(
-          taskDataState: TaskDataState.failure(error: 'Failed to load tasks'),
+          dataState: TaskDataState.failure(error: 'Failed to load tasks'),
         ),
       ],
     );

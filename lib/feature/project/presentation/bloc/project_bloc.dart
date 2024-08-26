@@ -9,14 +9,14 @@ class ProjectBloc extends Cubit<ProjectState> {
   final ProjectRepository projectRepository;
 
   Future<void> getProjects() => when(
-        state.projectDataState,
+        state.dataState,
         act: projectRepository.getProjects,
-        emit: (value) => emit(state.copyWith(projectDataState: value)),
+        emit: (value) => emit(state.copyWith(dataState: value)),
       );
 
   void selectProject(Project? value) {
     if (value == null) return;
-    
+
     emit(state.copyWith(selectedProject: value));
   }
 }

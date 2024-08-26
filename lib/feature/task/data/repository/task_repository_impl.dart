@@ -13,7 +13,7 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<List<CompletedTask>> getCompletedTasks(String projectId) {
+  Future<List<TaskCompleted>> getCompletedTasks(String projectId) {
     return dataSource.getCompletedTasks(projectId).then($mapToModels);
   }
 

@@ -5,13 +5,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'comment_state.freezed.dart';
 
 typedef CommentDataState = Data<List<Comment>>;
-typedef CommentSubmitState = Data<Comment>;
+typedef CommentPostState = Data<Comment>;
 
 @freezed
 class CommentState with _$CommentState {
   const factory CommentState({
     @Default(CommentDataState()) CommentDataState dataState,
-    @Default(CommentSubmitState()) CommentSubmitState submitState,
+    @Default(CommentPostState()) CommentPostState postState,
     @Default(TextInput.pure()) TextInput content,
     String? taskId,
     String? projectId,

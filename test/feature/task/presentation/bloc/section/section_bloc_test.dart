@@ -26,9 +26,9 @@ void main() {
       },
       act: (bloc) => bloc.getSections(),
       expect: () => [
-        const SectionState(sectionDataState: SectionDataState.loading()),
+        const SectionState(dataState: SectionDataState.loading()),
         const SectionState(
-          sectionDataState: SectionDataState.loaded(value: [Section(id: '1')]),
+          dataState: SectionDataState.loaded(value: [Section(id: '1')]),
         ),
       ],
     );
@@ -42,9 +42,9 @@ void main() {
       },
       act: (bloc) => bloc.getSections(),
       expect: () => [
-        const SectionState(sectionDataState: SectionDataState.loading()),
+        const SectionState(dataState: SectionDataState.loading()),
         const SectionState(
-          sectionDataState: SectionDataState.failure(
+          dataState: SectionDataState.failure(
             error: 'Failed to load sections',
           ),
         ),

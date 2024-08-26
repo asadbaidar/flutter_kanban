@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:locale/locale.dart';
 
-class TaskActionSheet extends StatelessWidget {
-  const TaskActionSheet({
+class TaskActionPopup extends StatelessWidget {
+  const TaskActionPopup({
     super.key,
     required this.action,
     this.onAction,

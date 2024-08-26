@@ -21,7 +21,7 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   }
 
   @override
-  Future<List<CompletedTaskEntity>> getCompletedTasks(String projectId) {
+  Future<List<TaskCompletedEntity>> getCompletedTasks(String projectId) {
     return httpClient.post<JsonObject>(
       baseUrl: environment.syncUrl,
       path: TaskEndpoints.completed,
@@ -32,7 +32,7 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
       (json) =>
           $mapList(
             json['items'],
-            (e) => CompletedTaskEntity.fromJson(e as JsonObject),
+            (e) => TaskCompletedEntity.fromJson(e as JsonObject),
           ) ??
           [],
     );

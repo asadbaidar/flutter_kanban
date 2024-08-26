@@ -9,18 +9,16 @@ class TaskBloc extends Cubit<TaskState> with SafeBloc {
   final TaskRepository taskRepository;
 
   Future<void> getTasks() => when(
-        state.taskDataState,
+        state.dataState,
         act: () => taskRepository.getTasks(state.projectId),
-        emit: (value) => emit(state.copyWith(taskDataState: value)),
+        emit: (value) => emit(state.copyWith(dataState: value)),
       );
 
   void projectChanged(Project? project) {
-    if (project == null) return;
-    final previous = state.project;
+    if (project == null || state.project == project) return;
 
     emit(state.copyWith(project: project));
-
-    if (previous != project) getTasks();
+    getTasks();
   }
 }
 
@@ -28,7 +26,7 @@ extension TaskUpdateBloc on TaskBloc {
   void addTask(Task task) {
     emit(
       state.copyWith(
-        taskDataState: state.taskDataState.copyWith(
+        dataState: state.dataState.copyWith(
           key: task.id,
           value: TaskData(all: state.sectionTasks.addTask(task)),
         ),
@@ -39,7 +37,7 @@ extension TaskUpdateBloc on TaskBloc {
   void updateTask(Task task) {
     emit(
       state.copyWith(
-        taskDataState: state.taskDataState.copyWith(
+        dataState: state.dataState.copyWith(
           key: task.id,
           value: TaskData(
             all: state.sectionTasks.removeTask(task).addTask(task),
@@ -60,26 +58,26 @@ extension TaskUpdateBloc on TaskBloc {
 
     emit(
       state.copyWith(
-        taskDataState: state.taskDataState.copyWith(
+        dataState: state.dataState.copyWith(
           value: TaskData(all: update),
         ),
-        taskMoveState: Data.loading(key: taskId),
+        moveState: Data.loading(key: taskId),
       ),
     );
     try {
       await taskRepository.moveTask(id: taskId, sectionId: targetSectionId);
       emit(
         state.copyWith(
-          taskMoveState: state.taskMoveState.toLoaded(),
+          moveState: state.moveState.toLoaded(),
         ),
       );
     } catch (e) {
       emit(
         state.copyWith(
-          taskDataState: state.taskDataState.copyWith(
+          dataState: state.dataState.copyWith(
             value: TaskData(all: backup),
           ),
-          taskMoveState: state.taskMoveState.toFailure(error: e),
+          moveState: state.moveState.toFailure(error: e),
         ),
       );
     }

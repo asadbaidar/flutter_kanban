@@ -14,10 +14,9 @@ class TaskSectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
-      buildWhen: (previous, current) =>
-          previous.taskDataState != current.taskDataState,
+      buildWhen: (previous, current) => previous.dataState != current.dataState,
       builder: (context, state) {
-        return state.taskDataState.when(
+        return state.dataState.when(
           otherwise: (_) => const CustomProgress.medium(),
           failure: (data) => CustomError(
             isFailure: data.isFailure,

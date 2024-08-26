@@ -8,6 +8,7 @@ import 'package:mocktail/mocktail.dart';
 class MockTaskRepository extends Mock implements TaskRepository {}
 
 class FakeTask extends Fake implements Task {}
+
 class FakeTaskDto extends Fake implements TaskDto {}
 
 void main() {
@@ -33,7 +34,7 @@ void main() {
       blocTest<TaskFormBloc, TaskFormState>(
         'does nothing when state is not validated',
         build: () => taskFormBloc,
-        act: (bloc) async => await bloc.submit(),
+        act: (bloc) async => await bloc.save(),
         expect: () => <TaskFormState>[],
         verify: (_) {
           verifyNever(() => mockTaskRepository.updateTask(any(), any()));
@@ -62,7 +63,7 @@ void main() {
       //         id: '1',
       //         content: 'Content'.toTextInput(),
       //         validity: Formsz.valid(),
-      //         submitState: SubmitState
+      //         saveState: SubmitState
       //             .loading(), // Assuming SubmitState has a loading state
       //         isEditing: true,
       //       ),
@@ -70,7 +71,7 @@ void main() {
       //         id: '1',
       //         content: 'Content'.toTextInput(),
       //         validity: Formsz.valid(),
-      //         submitState: SubmitState
+      //         saveState: SubmitState
       //             .success(), // Assuming SubmitState has a success state
       //         isEditing: true,
       //       ),
@@ -98,13 +99,13 @@ void main() {
       //       TaskFormState(
       //         content: 'Content'.toTextInput(),
       //         validity: Formsz.valid(),
-      //         submitState: SubmitState.loading(),
+      //         saveState: SubmitState.loading(),
       //         isEditing: false,
       //       ),
       //       TaskFormState(
       //         content: 'Content'.toTextInput(),
       //         validity: Formsz.valid(),
-      //         submitState: SubmitState.success(),
+      //         saveState: SubmitState.success(),
       //         isEditing: false,
       //       ),
       //     ],

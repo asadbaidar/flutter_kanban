@@ -10,15 +10,15 @@ class TaskFormBloc extends Cubit<TaskFormState> with SafeBloc {
 
   final TaskRepository taskRepository;
 
-  Future<void> submit() async {
+  Future<void> save() async {
     if (!state.isValidated) return;
 
     return when(
-      state.submitState,
+      state.saveState,
       act: () => state.isEditing
           ? taskRepository.updateTask(state.id, state.toDto())
           : taskRepository.createTask(state.toDto()),
-      emit: (value) => emit(state.copyWith(submitState: value)),
+      emit: (value) => emit(state.copyWith(saveState: value)),
     );
   }
 }

@@ -11,8 +11,8 @@ typedef TaskMoveState = Data<void>;
 @freezed
 class TaskState with _$TaskState {
   const factory TaskState({
-    @Default(TaskDataState()) TaskDataState taskDataState,
-    @Default(TaskMoveState()) TaskMoveState taskMoveState,
+    @Default(TaskDataState()) TaskDataState dataState,
+    @Default(TaskMoveState()) TaskMoveState moveState,
     Project? project,
     Task? draggingTask,
     Task? movingTask,
@@ -22,10 +22,10 @@ class TaskState with _$TaskState {
 extension TaskStateValues on TaskState {
   String get projectId => project?.id ?? '';
 
-  SectionTasks get sectionTasks => taskDataState.value?.all ?? {};
+  SectionTasks get sectionTasks => dataState.value?.all ?? {};
 
   bool isTaskMoveing(Task task) =>
-      taskMoveState.key == task.id && taskMoveState.isLoading;
+      moveState.key == task.id && moveState.isLoading;
 }
 
 extension TaskUpdateState on SectionTasks {

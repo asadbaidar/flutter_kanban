@@ -2,8 +2,8 @@ import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 
-class DraggableTaskItem extends StatelessWidget {
-  const DraggableTaskItem({
+class TaskDraggableCard extends StatelessWidget {
+  const TaskDraggableCard({
     super.key,
     required this.section,
     required this.item,

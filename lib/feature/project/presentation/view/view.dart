@@ -1,2 +1,2 @@
-export 'project_list_view.dart';
-export 'select_project_view.dart';
+export 'project_list.dart';
+export 'select_project.dart';

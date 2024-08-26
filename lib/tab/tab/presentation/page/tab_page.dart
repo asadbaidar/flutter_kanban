@@ -23,7 +23,7 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TabBloc(initialTab: _tab),
-      child: const TabView(),
+      child: const TabContent(),
     );
   }
 }

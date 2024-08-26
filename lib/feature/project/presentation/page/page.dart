@@ -1,2 +1,2 @@
 export 'project_page.dart';
-export 'project_view.dart';
+export 'project_content.dart';

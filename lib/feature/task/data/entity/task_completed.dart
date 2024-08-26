@@ -2,11 +2,11 @@ import 'package:common/common.dart';
 import 'package:core/feature/task/domain/domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'completed_task.g.dart';
+part 'task_completed.g.dart';
 
 @JsonSerializable()
-class CompletedTaskEntity implements ToModel<CompletedTask> {
-  CompletedTaskEntity({
+class TaskCompletedEntity implements ToModel<TaskCompleted> {
+  TaskCompletedEntity({
     this.completedAt,
     this.content,
     this.projectId,
@@ -14,8 +14,8 @@ class CompletedTaskEntity implements ToModel<CompletedTask> {
     this.taskId,
   });
 
-  factory CompletedTaskEntity.fromJson(Map<String, dynamic> json) =>
-      _$CompletedTaskEntityFromJson(json);
+  factory TaskCompletedEntity.fromJson(Map<String, dynamic> json) =>
+      _$TaskCompletedEntityFromJson(json);
 
   final String? completedAt;
   final String? content;
@@ -24,8 +24,8 @@ class CompletedTaskEntity implements ToModel<CompletedTask> {
   final String? taskId;
 
   @override
-  CompletedTask toModel() {
-    return CompletedTask(
+  TaskCompleted toModel() {
+    return TaskCompleted(
       completedAt: DateTime.tryParse(completedAt ?? '')?.toLocal(),
       content: content,
       projectId: projectId,

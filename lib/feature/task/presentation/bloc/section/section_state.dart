@@ -10,7 +10,7 @@ typedef SectionDataState = Data<List<Section>>;
 @freezed
 class SectionState with _$SectionState {
   const factory SectionState({
-    @Default(SectionDataState()) SectionDataState sectionDataState,
+    @Default(SectionDataState()) SectionDataState dataState,
     Project? project,
   }) = _SectionState;
 }
@@ -18,7 +18,7 @@ class SectionState with _$SectionState {
 extension SectionStateValues on SectionState {
   String get projectId => project?.id ?? '';
 
-  List<Section> get sections => sectionDataState.value ?? [];
+  List<Section> get sections => dataState.value ?? [];
 }
 
 extension GetSectionById on List<Section> {

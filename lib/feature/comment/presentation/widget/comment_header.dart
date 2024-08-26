@@ -13,14 +13,11 @@ class CommentHeader extends StatelessWidget {
           thickness: 4,
           color: context.surfaceContainerHighest,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
+        const HeaderText(
+          'Comments',
+          padding: EdgeInsets.symmetric(
             vertical: 8,
             horizontal: 16,
-          ),
-          child: Text(
-            'Comments',
-            style: context.title2,
           ),
         ),
       ],

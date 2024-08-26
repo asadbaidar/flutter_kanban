@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TaskInputForm extends StatelessWidget {
-  const TaskInputForm({super.key});
+class TaskFormView extends StatelessWidget {
+  const TaskFormView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,35 +53,8 @@ class _TaskActionBar extends StatelessWidget {
         children: [
           TaskSectionInput(),
           SizedBox(width: 16),
-          TaskCompleteButton(),
+          TaskCompleteInput(),
         ],
-      ),
-    );
-  }
-}
-
-class TaskCompleteButton extends StatelessWidget {
-  const TaskCompleteButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final id = context.select((TaskFormBloc bloc) => bloc.state.id);
-    final isClosing = id.isNotEmpty &&
-        context.select(
-          (TaskCompletedBloc bloc) => bloc.state.isTaskClosing(id),
-        );
-    return CustomTagView.dropDown(
-      text: 'Complete',
-      foreground: context.onSurface,
-      loading: isClosing,
-      onTap: () => showCupertinoModalPopup<void>(
-        context: context,
-        builder: (context) => TaskActionSheet(
-          action: 'Complete',
-          onAction: () {
-            context.read<TaskCompletedBloc>().closeTask(id);
-          },
-        ),
       ),
     );
   }
@@ -92,10 +65,10 @@ class _CommentListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEditing = context.select(
-      (TaskFormBloc bloc) => bloc.state.validity.isPure && bloc.state.isEditing,
+    final isEditingPure = context.select(
+      (TaskFormBloc bloc) => bloc.state.isEditingPure,
     );
-    return isEditing ? const CommentListView() : const SliverToBoxAdapter();
+    return isEditingPure ? const CommentListView() : const SliverToBoxAdapter();
   }
 }
 
@@ -104,9 +77,9 @@ class _CommentInputForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEditing = context.select(
-      (TaskFormBloc bloc) => bloc.state.validity.isPure && bloc.state.isEditing,
+    final isEditingPure = context.select(
+      (TaskFormBloc bloc) => bloc.state.isEditingPure,
     );
-    return isEditing ? const CommentInputForm() : const SizedBox.shrink();
+    return isEditingPure ? const CommentFormView() : const SizedBox.shrink();
   }
 }

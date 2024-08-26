@@ -12,7 +12,8 @@ class CommentListView extends StatelessWidget {
       buildWhen: (previous, current) => previous.dataState != current.dataState,
       builder: (context, state) {
         return state.dataState.when(
-          otherwise: (_) => const CustomProgress.small().paddingAll(16).sliverBox,
+          otherwise: (_) =>
+              const CustomProgress.small().paddingAll(16).sliverBox,
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,
@@ -20,9 +21,29 @@ class CommentListView extends StatelessWidget {
           ).sliverBox,
           loaded: (data) {
             final comments = state.comments;
-            return CommentList(items: comments);
+            return _CommentList(items: comments);
           },
         );
+      },
+    );
+  }
+}
+
+class _CommentList extends StatelessWidget {
+  const _CommentList({
+    required this.items,
+  });
+
+  final List<Comment> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return SmartSliverList.builder(
+      headerBuilder: (_) =>
+          items.isEmpty ? const SizedBox.shrink() : const CommentHeader(),
+      items: items,
+      itemBuilder: (context, index, item) {
+        return CommentTile(item: item!);
       },
     );
   }

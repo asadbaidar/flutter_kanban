@@ -28,7 +28,7 @@ class TaskListView extends StatelessWidget {
     return BlocBuilder<TaskBloc, TaskState>(
       buildWhen: (previous, current) =>
           previous.draggingTask != current.draggingTask ||
-          previous.taskMoveState != current.taskMoveState,
+          previous.moveState != current.moveState,
       builder: (context, state) {
         if (items.isEmpty) {
           return CustomError(
@@ -42,7 +42,7 @@ class TaskListView extends StatelessWidget {
           footerBuilder: (_) => const SizedBox(height: 40),
           itemBuilder: (context, index) {
             final item = items[index];
-            return DraggableTaskItem(
+            return TaskDraggableCard(
               section: section,
               item: item,
               size: itemSize,

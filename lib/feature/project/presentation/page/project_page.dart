@@ -1,5 +1,5 @@
 import 'package:common/common.dart';
-import 'package:core/feature/project/presentation/presentation.dart';
+import 'package:core/feature/project/project.dart';
 import 'package:flutter/material.dart';
 
 class ProjectPage extends Page<void> {
@@ -14,7 +14,7 @@ class ProjectPage extends Page<void> {
     return ModalBottomSheetRoute(
       settings: this,
       isScrollControlled: true,
-      builder: (context) => const ProjectView(),
+      builder: (context) => const ProjectContent(),
     );
   }
 }

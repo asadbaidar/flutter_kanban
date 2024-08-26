@@ -1,28 +1,28 @@
 import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
-import 'package:core/tab/home/home.dart';
+import 'package:core/tab/home/presentation/view/view.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class BoardContent extends StatelessWidget {
+  const BoardContent({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CustomAppBar(
         customTitle: TitleView(),
-        actions: [LocaleButton(), TaskSyncButton()],
+        actions: [TaskSyncButton()],
       ),
-      body: _HomeBody(),
+      body: _BoardBody(),
     );
   }
 }
 
-class _HomeBody extends StatelessWidget {
-  const _HomeBody();
+class _BoardBody extends StatelessWidget {
+  const _BoardBody();
 
   @override
   Widget build(BuildContext context) {
-    return const CompletedTaskView();
+    return const TaskSectionView();
   }
 }

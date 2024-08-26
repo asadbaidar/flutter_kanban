@@ -9,11 +9,11 @@ class TaskSyncButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadingProject = context
-        .select((ProjectBloc bloc) => bloc.state.projectDataState.isLoading);
+    final loadingProject =
+        context.select((ProjectBloc bloc) => bloc.state.dataState.isLoading);
 
     final loadingTask =
-        context.select((TaskBloc bloc) => bloc.state.taskDataState.isLoading);
+        context.select((TaskBloc bloc) => bloc.state.dataState.isLoading);
 
     final loadingCompletedTask = context
         .select((TaskCompletedBloc bloc) => bloc.state.dataState.isLoading);

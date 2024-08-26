@@ -1,6 +1,6 @@
 import 'package:common/common.dart';
 import 'package:core/core.dart';
-import 'package:core/feature/comment/presentation/view/provider.dart';
+import 'package:core/feature/comment/comment.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

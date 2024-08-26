@@ -61,7 +61,7 @@ Future<void> initialzeDependencies() async {
     ..registerFactory<TaskCompletedBloc>(
       () => TaskCompletedBloc(taskRepository: injector()),
     )
-    
+
     // Comment
     ..registerLazySingleton<CommentRemoteDataSource>(
       () => CommentRemoteDataSourceImpl(httpClient: injector()),

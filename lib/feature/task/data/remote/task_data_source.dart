@@ -3,7 +3,7 @@ import 'package:core/feature/task/task.dart';
 
 abstract class TaskRemoteDataSource {
   Future<TaskDataEntity> getTasks(String projectId);
-  Future<List<CompletedTaskEntity>> getCompletedTasks(String projectId);
+  Future<List<TaskCompletedEntity>> getCompletedTasks(String projectId);
 
   Future<TaskEntity> createTask(TaskDtoEntity dto);
   Future<TaskEntity> updateTask(String id, TaskDtoEntity dto);

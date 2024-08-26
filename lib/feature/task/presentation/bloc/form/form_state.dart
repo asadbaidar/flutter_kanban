@@ -4,12 +4,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'form_state.freezed.dart';
 
-typedef TaskSubmitState = Data<Task>;
+typedef TaskSaveState = Data<Task>;
 
 @freezed
 class TaskFormState with _$TaskFormState {
   const factory TaskFormState({
-    @Default(TaskSubmitState()) TaskSubmitState submitState,
+    @Default(TaskSaveState()) TaskSaveState saveState,
     @Default(TextInput.pure()) TextInput content,
     @Default(TextInput.pure()) TextInput description,
     @Default(PositiveInt.pure()) PositiveInt duration,
@@ -49,6 +49,8 @@ extension TaskFormValidation on TaskFormState {
   bool get isEditing => task != null;
 
   bool get isValidated => validity.isValidated;
+
+  bool get isEditingPure => validity.isPure && isEditing;
 }
 
 extension TaskStateToDto on TaskFormState {

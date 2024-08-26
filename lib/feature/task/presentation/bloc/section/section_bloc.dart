@@ -9,17 +9,15 @@ class SectionBloc extends Cubit<SectionState> {
   final SectionRepository sectionRepository;
 
   Future<void> getSections() => when(
-        state.sectionDataState,
+        state.dataState,
         act: () => sectionRepository.getSections(state.projectId),
-        emit: (value) => emit(state.copyWith(sectionDataState: value)),
+        emit: (value) => emit(state.copyWith(dataState: value)),
       );
 
   void projectChanged(Project? project) {
-    if (project == null) return;
-    final previous = state.project;
+    if (project == null || state.project == project) return;
 
     emit(state.copyWith(project: project));
-
-    if (previous != project) getSections();
+    getSections();
   }
 }

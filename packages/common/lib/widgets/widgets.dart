@@ -7,6 +7,7 @@ export 'drag_section_target.dart';
 export 'dynamic_text.dart';
 export 'elevated_button.dart';
 export 'fixed_grid_view.dart';
+export 'header_text.dart';
 export 'ink_well.dart';
 export 'lifecycle_observer.dart';
 export 'list_view.dart';

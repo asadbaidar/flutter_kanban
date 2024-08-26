@@ -25,14 +25,14 @@ class CommentBloc extends Cubit<CommentState> with SafeBloc {
     );
   }
 
-  Future<void> createComment() {
+  Future<void> postComment() {
     return when(
-      state.submitState,
+      state.postState,
       act: () => commentRepository.createComment(state.toDto()),
-      emit: (data) => emit(state.copyWith(submitState: data)),
+      emit: (data) => emit(state.copyWith(postState: data)),
       onLoaded: (data) => emit(
         state.copyWith(
-          submitState: data,
+          postState: data,
           dataState: state.dataState.addComment(data.value!),
         ),
       ),
@@ -50,7 +50,7 @@ extension CommentFormBloc on CommentBloc {
     emit(
       state.copyWith(
         content: const TextInput.pure(),
-        submitState: const Data(),
+        postState: const Data(),
       ),
     );
   }

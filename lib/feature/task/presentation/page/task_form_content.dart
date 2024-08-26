@@ -11,9 +11,9 @@ class TaskFormContent extends StatelessWidget {
       body: CustomBottomSheet(
         dragHandle: CustomDragHandle(padding: EdgeInsets.only(top: 16)),
         leadingAction: TaskDiscardButton(),
-        trailingAction: TaskSubmitButton(),
+        trailingAction: TaskSaveButton(),
         customTitle: SizedBox(height: 16),
-        body: TaskInputForm(),
+        body: TaskFormView(),
       ),
     );
   }

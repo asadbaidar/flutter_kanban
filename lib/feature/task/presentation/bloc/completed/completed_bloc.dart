@@ -17,12 +17,10 @@ class TaskCompletedBloc extends Cubit<TaskCompletedState> with SafeBloc {
       );
 
   void projectChanged(Project? project) {
-    if (project == null) return;
-    final previous = state.project;
+    if (project == null || state.project == project) return;
 
     emit(state.copyWith(project: project));
-
-    if (previous != project) getCompletedTasks();
+    getCompletedTasks();
   }
 }
 

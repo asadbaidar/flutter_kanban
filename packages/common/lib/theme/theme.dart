@@ -120,5 +120,4 @@ extension AppThemeContext on BuildContext {
           systemOverlayStyle: surfaceContainerNavBar,
         ),
       );
-
 }

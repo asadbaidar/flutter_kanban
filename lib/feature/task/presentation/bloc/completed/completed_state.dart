@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'completed_state.freezed.dart';
 
-typedef TaskCompletedDataState = Data<List<CompletedTask>>;
+typedef TaskCompletedDataState = Data<List<TaskCompleted>>;
 typedef TaskActionState = Data<void>;
 
 @freezed
@@ -21,7 +21,7 @@ class TaskCompletedState with _$TaskCompletedState {
 extension TaskCompletedStateValues on TaskCompletedState {
   String get projectId => project?.id ?? '';
 
-  List<CompletedTask> get tasks => dataState.value ?? [];
+  List<TaskCompleted> get tasks => dataState.value ?? [];
 
   bool isTaskReopening(String id) =>
       reopenState.key == id && reopenState.isLoading;
@@ -29,8 +29,8 @@ extension TaskCompletedStateValues on TaskCompletedState {
   bool isTaskClosing(String id) => closeState.key == id && closeState.isLoading;
 }
 
-extension GetCompletedTaskById on List<CompletedTask> {
-  CompletedTask? getById(String? id) =>
+extension GetCompletedTaskById on List<TaskCompleted> {
+  TaskCompleted? getById(String? id) =>
       firstWhereOrNull((element) => element.taskId == id);
 }
 

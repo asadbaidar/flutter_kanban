@@ -9,13 +9,13 @@ typedef ProjectDataState = Data<List<Project>>;
 @freezed
 class ProjectState with _$ProjectState {
   const factory ProjectState({
-    @Default(ProjectDataState()) ProjectDataState projectDataState,
+    @Default(ProjectDataState()) ProjectDataState dataState,
     Project? selectedProject,
   }) = _ProjectState;
 }
 
 extension ProjectStateValue on ProjectState {
-  List<Project> get projects => projectDataState.value ?? [];
+  List<Project> get projects => dataState.value ?? [];
 
   Project? get selectedOrFirst => selectedProject ?? projects.firstOrNull;
 

@@ -36,7 +36,7 @@ enum TabItem {
   ];
 }
 
-extension TabItemHelper on TabItem {
+extension TabItemValues on TabItem {
   String get title {
     switch (this) {
       case TabItem.home:

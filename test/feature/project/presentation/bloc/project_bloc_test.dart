@@ -30,10 +30,10 @@ void main() {
       act: (bloc) => bloc.getProjects(),
       expect: () => [
         const ProjectState(
-          projectDataState: ProjectDataState.loading(),
+          dataState: ProjectDataState.loading(),
         ),
         ProjectState(
-          projectDataState: ProjectDataState.loaded(
+          dataState: ProjectDataState.loaded(
             value: mockProjectsList,
           ),
         ),
@@ -54,10 +54,10 @@ void main() {
       act: (bloc) => bloc.getProjects(),
       expect: () => [
         const ProjectState(
-          projectDataState: ProjectDataState.loading(),
+          dataState: ProjectDataState.loading(),
         ),
         const ProjectState(
-          projectDataState: ProjectDataState.failure(
+          dataState: ProjectDataState.failure(
             error: 'Failed to fetch projects',
           ),
         ),
