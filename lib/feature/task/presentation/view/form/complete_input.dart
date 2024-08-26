@@ -13,6 +13,8 @@ class TaskCompleteInput extends StatelessWidget {
         context.select(
           (TaskCompletedBloc bloc) => bloc.state.isTaskClosing(id),
         );
+    if (id.isEmpty) return const SizedBox.shrink();
+
     return CustomTagView.dropDown(
       text: 'Complete',
       foreground: context.onSurface,
