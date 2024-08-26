@@ -14,7 +14,7 @@ $ flutter pub get
 $ dart run build_runner build --delete-conflicting-outputs
 ```
 
-To run the project, use the following commands:
+To run the app, use the following commands:
 ```sh
 $ cd app/kanban
 $ flutter run --flavor dev --target lib/main_dev.dart
@@ -28,9 +28,8 @@ $ flutter build appbundle --flavor dev --target lib/main_dev.dart
 $ flutter build ipa --flavor dev --target lib/main_dev.dart
 ```
 
-
 ## Local Test Coverage
-Run test coverage and generate report. lcov is required to generate the report. Install it before running the command.
+To run test coverage and generate report, lcov is required. Install it before running the command.
 ```sh
 $ sh test_coverage.sh
 ```
