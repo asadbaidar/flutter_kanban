@@ -15,12 +15,12 @@ Flutter app for Kanban board to manage tasks using Todoist API.
 ## Screenshots
 | Home | Board | Task |
 | --- | --- | --- |
-| ![home](.content/home.png) | ![Board](.content/board.png) | ![Task](.content/task.png) |
+| ![home](./assets/home.png) | ![Board](./assets/board.png) | ![Task](./assets/task.png) |
 
 ## Screen records
 | Create | Edit | Comment | Complete |
 | --- | --- | --- | --- |
-| <video width="529" height="1280" controls> <source src=".content/create.mp4" type="video/mp4"> ![Create](.content/create.mp4) </video> | <video width="529" height="1280" controls> <source src=".content/edit.mp4" type="video/mp4"> ![Edit](.content/edit.mp4) </video> | <video width="529" height="1280" controls> <source src=".content/comment.mp4" type="video/mp4"> ![Comment](.content/comment.mp4) </video> | <video width="529" height="1280" controls> <source src=".content/complete.mp4" type="video/mp4"> ![Complete](.content/complete.mp4) </video> |
+| <video src="./assets/create.mp4" controls> | <video src="./assets/edit.mp4" controls> | <video src="./assets/comment.mp4" controls> | <video src="./assets/complete.mp4" controls> |
 
 ## Pre-requisites
 Make sure you have following or latest flutter/dart sdk installed on your machine. If not, follow the instructions [here](https://flutter.dev/docs/get-started/install).
