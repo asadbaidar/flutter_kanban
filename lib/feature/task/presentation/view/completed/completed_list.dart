@@ -16,7 +16,13 @@ class TaskCompletedList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmartListView.builder(
       padding: const EdgeInsets.all(16.0),
-      headerBuilder: (_) => const HeaderText('Completed'),
+      headerBuilder: (_) => HeaderText(
+        'Completed',
+        trailing: CustomTagView(
+          text: items.length.toString(),
+          foreground: context.secondary,
+        ),
+      ),
       footerBuilder: (_) => const SizedBox(height: 40),
       items: items,
       itemBuilder: (context, index, item) {

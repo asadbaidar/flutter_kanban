@@ -5,10 +5,12 @@ class HeaderText extends StatelessWidget {
   const HeaderText(
     this.text, {
     super.key,
-    this.padding = const EdgeInsets.symmetric(vertical: 4),
+    this.trailing,
+    this.padding = const EdgeInsets.symmetric(vertical: 6),
   });
 
   final String? text;
+  final Widget? trailing;
   final EdgeInsetsGeometry padding;
 
   @override
@@ -16,11 +18,13 @@ class HeaderText extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             text ?? '',
             style: context.title2,
           ),
+          if (trailing != null) trailing!,
         ],
       ),
     );
