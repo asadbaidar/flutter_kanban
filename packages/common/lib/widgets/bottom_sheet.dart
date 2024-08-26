@@ -49,7 +49,7 @@ class CustomBottomSheet extends StatelessWidget {
             ),
           ),
         if (title != null)
-          CustomHeader(
+          CustomTitleBar(
             title: title,
             padding: EdgeInsets.fromLTRB(16, showDragHandle ? 0 : 32, 16, 16),
           ),

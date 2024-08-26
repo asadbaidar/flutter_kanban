@@ -80,7 +80,7 @@ class _TaskSectionPageView extends StatelessWidget {
             section,
             count: tasks.length,
           ),
-          child: DragTargetSection(
+          child: CustomDragTarget(
             initialOffset: _horizontalPadding,
             scrollController: _pageKey.controller,
             items: tasks,

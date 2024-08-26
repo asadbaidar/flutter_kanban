@@ -72,13 +72,6 @@ class DialogTextAction extends StatelessWidget {
   }
 }
 
-class DialogSaveAction extends DialogTextAction {
-  DialogSaveAction({
-    super.key,
-    super.onPressed,
-  }) : super(LocaleStrings.save, pop: false);
-}
-
 class DialogDiscardAction extends DialogTextAction {
   DialogDiscardAction({
     super.key,
@@ -100,56 +93,6 @@ class DialogCancelAction extends DialogTextAction {
   }) : super(LocaleStrings.cancel);
 }
 
-class DialogNoAction extends DialogTextAction {
-  DialogNoAction({
-    super.key,
-    super.onPressed,
-  }) : super(LocaleStrings.no);
-}
-
-class DialogYesAction extends DialogTextAction {
-  DialogYesAction({
-    super.key,
-    super.onPressed,
-  }) : super(LocaleStrings.yes, pop: false);
-}
-
-class ConfirmSaveDialog extends StatelessWidget {
-  const ConfirmSaveDialog({
-    this.onSave,
-    this.onDiscard,
-    super.key,
-  });
-
-  static void show(
-    BuildContext context, {
-    VoidCallback? onSave,
-    VoidCallback? onDiscard,
-  }) =>
-      showDialog<void>(
-        context: context,
-        builder: (_) => ConfirmSaveDialog(
-          onSave: onSave,
-          onDiscard: onDiscard,
-        ),
-      );
-
-  final VoidCallback? onSave;
-  final VoidCallback? onDiscard;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomAlertDialog(
-      dismissible: false,
-      title: LocaleStrings.saveChanges,
-      message: LocaleStrings.saveChangesSubtitle,
-      actions: [
-        DialogDiscardAction(onPressed: onDiscard),
-        DialogSaveAction(onPressed: onSave),
-      ],
-    );
-  }
-}
 
 class ConfirmDiscardDialog extends StatelessWidget {
   const ConfirmDiscardDialog({

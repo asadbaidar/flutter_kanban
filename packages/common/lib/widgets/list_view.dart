@@ -3,66 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locale/locale.dart';
 
-class CustomHorizontalListView extends StatelessWidget {
-  const CustomHorizontalListView({
-    super.key,
-    required this.itemBuilder,
-    this.itemCount = 0,
-    this.section,
-    this.divider,
-    this.edgeDivider = const SizedBox(width: 8),
-    this.height = 180,
-    this.shrinkWrap = false,
-    this.clipBehavior = Clip.hardEdge,
-    this.controller,
-  });
-
-  final IndexedWidgetBuilder itemBuilder;
-  final int itemCount;
-  final Widget? section;
-  final Widget? divider;
-  final Widget? edgeDivider;
-  final double height;
-  final bool shrinkWrap;
-  final Clip clipBehavior;
-  final ScrollController? controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (section != null) section!,
-        SizedBox(
-          height: height,
-          child: ListView.separated(
-            clipBehavior: clipBehavior,
-            shrinkWrap: shrinkWrap,
-            scrollDirection: Axis.horizontal,
-            itemCount: itemCount,
-            controller: controller,
-            separatorBuilder: (context, index) =>
-                divider ?? const SizedBox.shrink(),
-            itemBuilder: (context, index) {
-              return edgeDivider != null
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (index == 0) edgeDivider!,
-                        itemBuilder(context, index),
-                        if (index == itemCount - 1) edgeDivider!,
-                      ],
-                    )
-                  : itemBuilder(context, index);
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class CustomListView extends StatelessWidget {
   const CustomListView({
     super.key,
@@ -162,8 +102,8 @@ class CustomListView extends StatelessWidget {
   }
 }
 
-class CustomHeader extends StatelessWidget {
-  const CustomHeader({
+class CustomTitleBar extends StatelessWidget {
+  const CustomTitleBar({
     super.key,
     this.title,
     this.subtitle,

@@ -1,8 +1,8 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class DragTargetSection<T extends Object> extends StatelessWidget {
-  const DragTargetSection({
+class CustomDragTarget<T extends Object> extends StatelessWidget {
+  const CustomDragTarget({
     super.key,
     required this.items,
     required this.child,

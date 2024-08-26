@@ -344,58 +344,6 @@ extension TooltipWidget on Widget {
           : this;
 }
 
-class CustomTextButton extends StatelessWidget {
-  const CustomTextButton({
-    super.key,
-    this.text,
-    this.color,
-    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-    this.onPressed,
-    this.loading = false,
-    this.enabled = true,
-    this.textStyle,
-  }) : pressedOpacity = null;
-
-  const CustomTextButton.cupertino({
-    super.key,
-    this.text,
-    this.color,
-    this.pressedOpacity = 0.4,
-    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-    this.onPressed,
-    this.loading = false,
-    this.enabled = true,
-    this.textStyle,
-  });
-
-  final String? text;
-  final Color? color;
-  final double? pressedOpacity;
-  final EdgeInsetsGeometry padding;
-  final bool loading;
-  final bool enabled;
-  final VoidCallback? onPressed;
-  final TextStyle? textStyle;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomInkWell(
-      onTap: loading || !enabled ? null : onPressed,
-      pressedOpacity: pressedOpacity,
-      constraints: const BoxConstraints(minWidth: 32),
-      padding: padding,
-      borderRadius: pressedOpacity != null ? 0 : 8,
-      child: loading
-          ? const CustomProgress.small()
-          : Text(
-              text ?? '',
-              style: textStyle ??
-                  context.bodyLarge?.withColor(color ?? context.onSurface),
-            ),
-    );
-  }
-}
-
 class CustomActionButton extends StatelessWidget {
   const CustomActionButton({
     super.key,
@@ -464,68 +412,6 @@ class CustomActionButton extends StatelessWidget {
               color: foreground,
               fontWeight: bold ? FontWeight.bold : null,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomMenuItemView extends StatelessWidget {
-  const CustomMenuItemView({
-    super.key,
-    this.title,
-    this.icon,
-    this.selected = false,
-    this.maxLines = 2,
-    this.height = 90,
-    this.padding = const EdgeInsets.fromLTRB(12, 16, 12, 8),
-    this.onPressed,
-  });
-
-  const CustomMenuItemView.small({
-    super.key,
-    this.title,
-    this.icon,
-    this.selected = false,
-    this.maxLines = 1,
-    this.height = 64,
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    this.onPressed,
-  });
-
-  final String? title;
-  final String? icon;
-  final bool selected;
-  final int maxLines;
-  final double height;
-  final EdgeInsetsGeometry padding;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final background = selected ? context.primary : context.primaryContainer;
-    final textColor = selected ? context.onPrimary : context.onPrimaryContainer;
-    final iconColor = selected ? context.onPrimary : context.primary;
-    return CustomInkWell(
-      borderRadius: 12,
-      constraints: BoxConstraints(minHeight: height),
-      padding: padding,
-      color: background,
-      onTap: onPressed,
-      child: Column(
-        children: [
-          AssetIcon(
-            AssetIcons.fromName(icon),
-            color: iconColor,
-          ),
-          const SizedBox(height: 2),
-          Text(
-            title ?? '',
-            style: context.body2?.withColor(textColor),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: maxLines,
           ),
         ],
       ),
