@@ -95,8 +95,6 @@ class AppTheme {
 }
 
 extension AppThemeContext on BuildContext {
-  IconThemeData get localIconTheme => IconTheme.of(this);
-
   SystemUiOverlayStyle? get systemOverlayStyle =>
       appBarTheme.systemOverlayStyle;
 

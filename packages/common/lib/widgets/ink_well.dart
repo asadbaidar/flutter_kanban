@@ -402,7 +402,7 @@ class CustomActionButton extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: IconTheme(
-                data: context.localIconTheme.copyWith(color: foreground),
+                data: context.iconTheme.copyWith(color: foreground),
                 child: icon!,
               ),
             ),
