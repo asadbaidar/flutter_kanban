@@ -80,10 +80,10 @@ class DialogDiscardAction extends DialogTextAction {
 }
 
 class DialogContinueAction extends DialogTextAction {
-  const DialogContinueAction({
+  DialogContinueAction({
     super.key,
     super.onPressed,
-  }) : super('Continue');
+  }) : super(LocaleStrings.continueText);
 }
 
 class DialogCancelAction extends DialogTextAction {
@@ -120,8 +120,8 @@ class ConfirmDiscardDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAlertDialog(
       dismissible: false,
-      title: 'Discard Changes',
-      message: 'Are you sure you want to discard your changes?',
+      title: LocaleStrings.discardChanges,
+      message: LocaleStrings.discardMessage,
       actions: [
         DialogDiscardAction(onPressed: onDiscard),
         DialogContinueAction(onPressed: onContinue),

@@ -4,6 +4,7 @@ import 'package:core/tab/board/board.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:locale/locale.dart';
 import 'package:provider/single_child_widget.dart';
 
 class TaskReopenListener extends SingleChildStatelessWidget {
@@ -16,7 +17,7 @@ class TaskReopenListener extends SingleChildStatelessWidget {
           previous.reopenState != current.reopenState,
       listener: (context, state) {
         if (state.reopenState.isLoaded) {
-          context.successSnackbar('Task reopend');
+          context.successSnackbar(LocaleStrings.taskReopened);
           context.go(BoardPage.route());
           context.read<TaskBloc>().getTasks();
           context.read<TaskCompletedBloc>().getCompletedTasks();

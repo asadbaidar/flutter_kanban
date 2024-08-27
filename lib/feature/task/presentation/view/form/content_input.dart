@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locale/locale.dart';
 
 class TaskContentInput extends StatelessWidget {
   const TaskContentInput({super.key});
@@ -14,7 +15,7 @@ class TaskContentInput extends StatelessWidget {
         return CustomTextField(
           initialValue: state.content.value,
           onChanged: context.read<TaskFormBloc>().contentChanged,
-          hintText: 'Summary',
+          hintText: LocaleStrings.summary,
           textStyle: context.title1,
           textInputAction: TextInputAction.next,
         );

@@ -1,6 +1,7 @@
 import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:locale/locale.dart';
 
 class TaskCompletedList extends StatelessWidget {
   const TaskCompletedList({
@@ -15,7 +16,7 @@ class TaskCompletedList extends StatelessWidget {
     return SmartListView.builder(
       padding: const EdgeInsets.all(16.0),
       headerBuilder: (_) => HeaderText(
-        'Completed',
+        LocaleStrings.completed,
         trailing: CustomTagView(
           text: items.length.toString(),
           foreground: context.secondary,

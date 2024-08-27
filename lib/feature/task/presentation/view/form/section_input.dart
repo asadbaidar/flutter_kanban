@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locale/locale.dart';
 
 class TaskSectionInput extends StatelessWidget {
   const TaskSectionInput({super.key});
@@ -54,7 +55,7 @@ class _TaskSectionDropDown extends StatelessWidget {
       builder: (context, state) {
         final section = sections.getById(state.sectionId.value);
         return CustomTagView.dropDown(
-          text: section?.name ?? 'Section',
+          text: section?.name ?? LocaleStrings.section,
           foreground: section?.color(context),
           enabled: !loading,
           loading: loading,

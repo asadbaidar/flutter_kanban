@@ -17,10 +17,10 @@ class TaskSaveButton extends StatelessWidget {
       listener: (context, state) {
         if (state.saveState.isLoaded) {
           if (state.isEditing) {
-            context.successSnackbar('Task updated');
+            context.successSnackbar(LocaleStrings.taskUpdated);
             context.read<TaskBloc>().updateTask(state.saveState.value!);
           } else {
-            context.successSnackbar('Task created');
+            context.successSnackbar(LocaleStrings.taskCreated);
             context.read<TaskBloc>().addTask(state.saveState.value!);
           }
           context.go(BoardPage.route());

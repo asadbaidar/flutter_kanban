@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locale/locale.dart';
 
 class TaskCompleteInput extends StatelessWidget {
   const TaskCompleteInput({super.key});
@@ -16,13 +17,13 @@ class TaskCompleteInput extends StatelessWidget {
     if (id.isEmpty) return const SizedBox.shrink();
 
     return CustomTagView.dropDown(
-      text: 'Complete',
+      text: LocaleStrings.complete,
       foreground: context.onSurface,
       loading: isClosing,
       onTap: () => showCupertinoModalPopup<void>(
         context: context,
         builder: (context) => TaskActionPopup(
-          action: 'Complete',
+          action: LocaleStrings.complete,
           onAction: () => context.read<TaskCompletedBloc>().closeTask(id),
         ),
       ),

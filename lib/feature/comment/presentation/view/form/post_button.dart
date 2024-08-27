@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:core/feature/comment/comment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locale/locale.dart';
 
 class CommentPostButton extends StatelessWidget {
   const CommentPostButton({super.key});
@@ -13,7 +14,7 @@ class CommentPostButton extends StatelessWidget {
           previous.postState != current.postState,
       listener: (context, state) {
         if (state.postState.isLoaded) {
-          context.successSnackbar('Comment posted');
+          context.successSnackbar(LocaleStrings.commentPosted);
           context.read<CommentBloc>().reset();
         } else if (state.postState.isFailure) {
           context.errorSnackbar(state.postState.errorMessage);

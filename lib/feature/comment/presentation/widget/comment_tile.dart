@@ -30,7 +30,7 @@ class CommentTile extends StatelessWidget {
         ),
         customTitle: Row(
           children: [
-            const Text('Me'),
+             Text(LocaleStrings.me),
             const SizedBox(width: 10),
             Text(
               time,

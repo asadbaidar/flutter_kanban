@@ -16,7 +16,7 @@ class TaskCompleted with _$TaskCompleted {
 
 extension CompletedAtFormat on TaskCompleted {
   String get completedAtFormmated =>
-      'Completed at ${completedAt?.formatMMMdyHma}';
+      completedAt == null ? '' : 'Completed at ${completedAt?.formatMMMdyHma}';
 }
 
 int taskByCompletion(TaskCompleted a, TaskCompleted b) {

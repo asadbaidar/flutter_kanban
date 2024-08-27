@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:locale/locale.dart';
 
 class CommentHeader extends StatelessWidget {
   const CommentHeader({super.key});
@@ -13,9 +14,9 @@ class CommentHeader extends StatelessWidget {
           thickness: 4,
           color: context.surfaceContainerHighest,
         ),
-        const HeaderText(
-          'Comments',
-          padding: EdgeInsets.symmetric(
+        HeaderText(
+          LocaleStrings.comments,
+          padding: const EdgeInsets.symmetric(
             vertical: 8,
             horizontal: 16,
           ),

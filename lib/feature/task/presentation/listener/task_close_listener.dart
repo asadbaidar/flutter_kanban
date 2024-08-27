@@ -4,6 +4,7 @@ import 'package:core/tab/home/home.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:locale/locale.dart';
 import 'package:provider/single_child_widget.dart';
 
 class TaskCloseListener extends SingleChildStatelessWidget {
@@ -16,7 +17,7 @@ class TaskCloseListener extends SingleChildStatelessWidget {
           previous.closeState != current.closeState,
       listener: (context, state) {
         if (state.closeState.isLoaded) {
-          context.successSnackbar('Task closed');
+          context.successSnackbar(LocaleStrings.taskClosed);
           context.go(HomePage.route());
           context.read<TaskBloc>().getTasks();
           context.read<TaskCompletedBloc>().getCompletedTasks();

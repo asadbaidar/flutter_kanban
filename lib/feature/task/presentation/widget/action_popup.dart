@@ -15,7 +15,7 @@ class TaskActionPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoActionSheet(
-      message: Text('Do you want to ${action.toLowerCase()} this task'),
+      message: Text(LocaleStrings.taskConfirmMessage(action)),
       actions: [
         CupertinoActionSheetAction(
           onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:core/feature/task/task.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locale/locale.dart';
 
 class TaskCompletedItem extends StatelessWidget {
   const TaskCompletedItem({
@@ -21,7 +22,7 @@ class TaskCompletedItem extends StatelessWidget {
       onTap: () => showCupertinoModalPopup<void>(
         context: context,
         builder: (context) => TaskActionPopup(
-          action: 'Reopen',
+          action: LocaleStrings.reopen,
           onAction: () =>
               context.read<TaskCompletedBloc>().reopenTask(item.taskId!),
         ),
