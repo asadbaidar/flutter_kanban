@@ -12,7 +12,7 @@ class TaskCompletedView extends StatelessWidget {
     return BlocBuilder<TaskCompletedBloc, TaskCompletedState>(
       builder: (context, state) {
         return state.dataState.when(
-          otherwise: (_) => const CustomProgress.medium(),
+          orElse: (_) => const CustomProgress.medium(),
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,

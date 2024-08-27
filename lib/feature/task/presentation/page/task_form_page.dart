@@ -25,7 +25,7 @@ class TaskFormPage extends Page<void> {
   Route<void> createRoute(BuildContext context) {
     return ModalBottomSheetRoute(
       settings: this,
-      constraints: context.fullSheetConstraints,
+      constraints: context.fullscreenNoStatusBar,
       isScrollControlled: true,
       builder: (context) => MultiBlocProvider(
         providers: [

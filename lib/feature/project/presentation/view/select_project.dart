@@ -12,7 +12,7 @@ class SelectProjectView extends StatelessWidget {
     return BlocBuilder<ProjectBloc, ProjectState>(
       builder: (context, state) {
         return state.dataState.when(
-          otherwise: (_) => const Padding(
+          orElse: (_) => const Padding(
             padding: EdgeInsets.only(top: 6),
             child: CustomProgress.small(centered: false),
           ),

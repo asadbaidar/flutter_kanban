@@ -17,7 +17,7 @@ class TaskSectionView extends StatelessWidget {
       buildWhen: (previous, current) => previous.dataState != current.dataState,
       builder: (context, state) {
         return state.dataState.when(
-          otherwise: (_) => const CustomProgress.medium(),
+          orElse: (_) => const CustomProgress.medium(),
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,

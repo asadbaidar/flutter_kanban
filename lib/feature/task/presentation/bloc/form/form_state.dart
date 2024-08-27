@@ -33,7 +33,7 @@ extension TaskFormValidation on TaskFormState {
     FormInput<DurationUnit?>? durationUnit,
     TextInput? sectionId,
   }) =>
-      Formsz.validate(
+      Forms.validate(
         requiredPure: isEditing,
         required: [
           content ?? this.content,

@@ -12,8 +12,7 @@ class CommentListView extends StatelessWidget {
       buildWhen: (previous, current) => previous.dataState != current.dataState,
       builder: (context, state) {
         return state.dataState.when(
-          otherwise: (_) =>
-              const CustomProgress.small().paddingAll(16).sliverBox,
+          orElse: (_) => const CustomProgress.small().paddingAll(16).sliverBox,
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,

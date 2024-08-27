@@ -26,7 +26,7 @@ class _ProjectView extends StatelessWidget {
     return BlocBuilder<ProjectBloc, ProjectState>(
       builder: (context, state) {
         return state.dataState.when(
-          otherwise: (_) => const CustomProgress.medium(),
+          orElse: (_) => const CustomProgress.medium(),
           failure: (data) => CustomError(
             isFailure: data.isFailure,
             message: data.errorMessage,

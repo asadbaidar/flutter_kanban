@@ -76,7 +76,7 @@ class _TaskSectionDropDown extends StatelessWidget {
     final formBloc = context.read<TaskFormBloc>();
     showMenu<String>(
       context: context,
-      position: context.getPosition(offset: const Offset(16, 0)),
+      position: context.getPosition(),
       initialValue: selected,
       items: items.map(
         (item) {
