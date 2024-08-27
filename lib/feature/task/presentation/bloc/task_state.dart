@@ -32,7 +32,7 @@ extension TaskUpdateState on SectionTasks {
   SectionTasks removeTask(Task task, {String? fromSection}) {
     final update = {...this};
     final sectionId = fromSection ?? task.sectionId ?? '';
-    final section = update[sectionId] ?? [];
+    final section = [...?update[sectionId]];
     section.removeWhere((t) => t.id == task.id);
     update[sectionId] = section;
     return update;
@@ -41,7 +41,7 @@ extension TaskUpdateState on SectionTasks {
   SectionTasks addTask(Task task, {String? toSection}) {
     final update = {...this};
     final sectionId = toSection ?? task.sectionId ?? '';
-    final section = update[sectionId] ?? [];
+    final section = [...?update[sectionId]];
     section.add(task.copyWith(sectionId: sectionId));
     update[sectionId] = section;
     return update;

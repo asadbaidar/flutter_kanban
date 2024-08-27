@@ -27,7 +27,7 @@ void main() {
   group('TaskRemoteDataSourceImpl', () {
     test('should fetch tasks successfully', () async {
       const projectId = 'project123';
-      final jsonResponse = [
+      const jsonResponse = [
         {'id': 'task1', 'content': 'Task 1'},
         {'id': 'task2', 'content': 'Task 2'},
       ];
@@ -51,9 +51,39 @@ void main() {
       ).called(1);
     });
 
+    test('should fetch completed tasks successfully', () async {
+      const projectId = 'project123';
+      const jsonResponse = {
+        'items': [
+          {'task_id': 'task1', 'content': 'Task 1'},
+          {'task_id': 'task2', 'content': 'Task 2'},
+        ],
+      };
+
+      when(
+        () => mockHttpClient.post<JsonObject>(
+          baseUrl: mockEnvironment.syncUrl,
+          path: TaskEndpoints.completed,
+          body: {'project_id': projectId},
+        ),
+      ).thenAnswer((_) async => jsonResponse);
+
+      final result = await dataSource.getCompletedTasks(projectId);
+
+      expect(result.length, 2);
+      expect(result.first.taskId, 'task1');
+      verify(
+        () => mockHttpClient.post<JsonObject>(
+          baseUrl: mockEnvironment.syncUrl,
+          path: TaskEndpoints.completed,
+          body: {'project_id': projectId},
+        ),
+      ).called(1);
+    });
+
     test('should create a task successfully', () async {
-      final dto = TaskDtoEntity(content: 'New Task');
-      final jsonResponse = {'id': 'task123', 'content': 'New Task'};
+      const dto = TaskDtoEntity(content: 'New Task');
+      const jsonResponse = {'id': 'task123', 'content': 'New Task'};
 
       when(
         () => mockHttpClient.post<JsonObject>(
@@ -76,8 +106,8 @@ void main() {
 
     test('should update a task successfully', () async {
       const id = 'task123';
-      final dto = TaskDtoEntity(content: 'Updated Task');
-      final jsonResponse = {'id': 'task123', 'content': 'Updated Task'};
+      const dto = TaskDtoEntity(content: 'Updated Task');
+      const jsonResponse = {'id': 'task123', 'content': 'Updated Task'};
 
       when(
         () => mockHttpClient.post<JsonObject>(
@@ -117,6 +147,42 @@ void main() {
           baseUrl: any(named: 'baseUrl'),
           path: any(named: 'path'),
           formData: any(named: 'formData'),
+        ),
+      ).called(1);
+    });
+
+    test('should close a task successfully', () async {
+      const id = 'task123';
+
+      when(
+        () => mockHttpClient.post<void>(
+          path: TaskEndpoints.close(id),
+        ),
+      ).thenAnswer((_) async {});
+
+      await dataSource.closeTask(id);
+
+      verify(
+        () => mockHttpClient.post<void>(
+          path: TaskEndpoints.close(id),
+        ),
+      ).called(1);
+    });
+
+    test('should reopen a task successfully', () async {
+      const id = 'task123';
+
+      when(
+        () => mockHttpClient.post<void>(
+          path: TaskEndpoints.reopen(id),
+        ),
+      ).thenAnswer((_) async {});
+
+      await dataSource.reopenTask(id);
+
+      verify(
+        () => mockHttpClient.post<void>(
+          path: TaskEndpoints.reopen(id),
         ),
       ).called(1);
     });

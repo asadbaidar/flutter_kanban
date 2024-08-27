@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('TaskDtoEntity', () {
     test('fromJson should return a valid TaskDtoEntity', () {
-      final json = {
+      const json = {
         'content': 'Task Content',
         'description': 'Task Description',
         'section_id': 'section_123',
@@ -15,7 +15,7 @@ void main() {
         'due_datetime': '2024-08-25T12:34:56Z',
         'assignee_id': 'user_123',
         'duration': 60,
-        'duration_unit': 'minutes',
+        'duration_unit': 'minute',
       };
 
       final taskDtoEntity = TaskDtoEntity.fromJson(json);
@@ -30,11 +30,11 @@ void main() {
       expect(taskDtoEntity.dueDatetime, '2024-08-25T12:34:56Z');
       expect(taskDtoEntity.assigneeId, 'user_123');
       expect(taskDtoEntity.duration, 60);
-      expect(taskDtoEntity.durationUnit, 'minutes');
+      expect(taskDtoEntity.durationUnit, 'minute');
     });
 
     test('fromJson with null values should handle gracefully', () {
-      final json = {
+      const json = {
         'content': null,
         'description': null,
         'section_id': null,
@@ -82,7 +82,7 @@ void main() {
     });
 
     test('toJson should return a valid JSON map', () {
-      final taskDtoEntity = TaskDtoEntity(
+      const taskDtoEntity = TaskDtoEntity(
         content: 'Task Content',
         description: 'Task Description',
         sectionId: 'section_123',
@@ -93,7 +93,7 @@ void main() {
         dueDatetime: '2024-08-25T12:34:56Z',
         assigneeId: 'user_123',
         duration: 60,
-        durationUnit: 'minutes',
+        durationUnit: 'minute',
       );
 
       final json = taskDtoEntity.toJson();
@@ -108,7 +108,7 @@ void main() {
       expect(json['due_datetime'], '2024-08-25T12:34:56Z');
       expect(json['assignee_id'], 'user_123');
       expect(json['duration'], 60);
-      expect(json['duration_unit'], 'minutes');
+      expect(json['duration_unit'], 'minute');
     });
 
     test('fromModel should convert TaskDto to TaskDtoEntity', () {

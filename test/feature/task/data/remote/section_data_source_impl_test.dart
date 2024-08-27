@@ -17,7 +17,7 @@ void main() {
   group('SectionRemoteDataSourceImpl', () {
     test('should return a list of SectionEntity when getSections is successful',
         () async {
-      final jsonResponse = [
+      const jsonResponse = [
         {
           'id': 'section1',
           'project_id': 'project1',

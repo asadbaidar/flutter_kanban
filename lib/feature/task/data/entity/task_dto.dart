@@ -6,7 +6,7 @@ part 'task_dto.g.dart';
 
 @JsonSerializable()
 class TaskDtoEntity {
-  TaskDtoEntity({
+  const TaskDtoEntity({
     this.content,
     this.description,
     this.sectionId,

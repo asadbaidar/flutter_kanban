@@ -4,20 +4,15 @@ import 'package:core/feature/task/task.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-// Mock classes
 class MockTaskRepository extends Mock implements TaskRepository {}
-
-class FakeTask extends Fake implements Task {}
-
-class FakeTaskDto extends Fake implements TaskDto {}
 
 void main() {
   late MockTaskRepository mockTaskRepository;
   late TaskFormBloc taskFormBloc;
 
   setUpAll(() {
-    registerFallbackValue(FakeTask());
-    registerFallbackValue(FakeTaskDto());
+    registerFallbackValue(const Task());
+    registerFallbackValue(const TaskDto());
   });
 
   setUp(() {
@@ -30,7 +25,7 @@ void main() {
       expect(taskFormBloc.state, equals(const TaskFormState()));
     });
 
-    group('submit', () {
+    group('save', () {
       blocTest<TaskFormBloc, TaskFormState>(
         'does nothing when state is not validated',
         build: () => taskFormBloc,
@@ -42,77 +37,110 @@ void main() {
         },
       );
 
-      //   blocTest<TaskFormBloc, TaskFormState>(
-      //     'calls updateTask when editing and state is validated',
-      //     build: () {
-      //       taskFormBloc = TaskFormBloc(
-      //         taskRepository: mockTaskRepository,
-      //         task: Task(id: '1'), // Assuming Task has an id field
-      //       );
-      //       return taskFormBloc;
-      //     },
-      //     seed: () => TaskFormState(
-      //       id: '1',
-      //       content: 'Content'.toTextInput(),
-      //       validity: Formsz.valid(), // Assuming Formsz.valid() means valid state
-      //       isEditing: true,
-      //     ),
-      //     act: (bloc) async => await bloc.submit(),
-      //     expect: () => [
-      //       TaskFormState(
-      //         id: '1',
-      //         content: 'Content'.toTextInput(),
-      //         validity: Formsz.valid(),
-      //         saveState: SubmitState
-      //             .loading(), // Assuming SubmitState has a loading state
-      //         isEditing: true,
-      //       ),
-      //       TaskFormState(
-      //         id: '1',
-      //         content: 'Content'.toTextInput(),
-      //         validity: Formsz.valid(),
-      //         saveState: SubmitState
-      //             .success(), // Assuming SubmitState has a success state
-      //         isEditing: true,
-      //       ),
-      //     ],
-      //     verify: (_) {
-      //       verify(() => mockTaskRepository.updateTask('1', any())).called(1);
-      //     },
-      //   );
-      //
-      //   blocTest<TaskFormBloc, TaskFormState>(
-      //     'calls createTask when not editing and state is validated',
-      //     build: () {
-      //       return TaskFormBloc(
-      //         taskRepository: mockTaskRepository,
-      //         task: Task(id: '1'),
-      //       );
-      //     },
-      //     seed: () => TaskFormState(
-      //       content: 'Content'.toTextInput(),
-      //       validity: Formsz.valid(),
-      //       isEditing: false,
-      //     ),
-      //     act: (bloc) async => await bloc.submit(),
-      //     expect: () => [
-      //       TaskFormState(
-      //         content: 'Content'.toTextInput(),
-      //         validity: Formsz.valid(),
-      //         saveState: SubmitState.loading(),
-      //         isEditing: false,
-      //       ),
-      //       TaskFormState(
-      //         content: 'Content'.toTextInput(),
-      //         validity: Formsz.valid(),
-      //         saveState: SubmitState.success(),
-      //         isEditing: false,
-      //       ),
-      //     ],
-      //     verify: (_) {
-      //       verify(() => mockTaskRepository.createTask(any())).called(1);
-      //     },
-      //   );
+      const taskToEdit = Task(id: '1', content: 'Old Content');
+
+      blocTest<TaskFormBloc, TaskFormState>(
+        'calls updateTask when editing and state is validated',
+        setUp: () {
+          when(() => mockTaskRepository.updateTask('1', any()))
+              .thenAnswer((_) async => const Task(id: '1', content: 'Content'));
+        },
+        build: () => TaskFormBloc(
+          taskRepository: mockTaskRepository,
+          task: taskToEdit,
+        ),
+        seed: () => TaskFormState(
+          content: 'Content'.toTextInput(),
+          validity: FormzStatus.valid,
+          task: taskToEdit,
+        ),
+        act: (bloc) async => await bloc.save(),
+        expect: () => [
+          TaskFormState(
+            content: 'Content'.toTextInput(),
+            validity: FormzStatus.valid,
+            saveState: const Data.loading(),
+            task: taskToEdit,
+          ),
+          TaskFormState(
+            content: 'Content'.toTextInput(),
+            validity: FormzStatus.valid,
+            saveState:
+                const Data.loaded(value: Task(id: '1', content: 'Content')),
+            task: taskToEdit,
+          ),
+        ],
+        verify: (_) {
+          verify(() => mockTaskRepository.updateTask('1', any())).called(1);
+        },
+      );
+
+      blocTest<TaskFormBloc, TaskFormState>(
+        'calls createTask when not editing and state is validated',
+        setUp: () {
+          when(() => mockTaskRepository.createTask(any()))
+              .thenAnswer((_) async => const Task(id: '1', content: 'Content'));
+        },
+        build: () {
+          return TaskFormBloc(
+            taskRepository: mockTaskRepository,
+          );
+        },
+        seed: () => TaskFormState(
+          content: 'Content'.toTextInput(),
+          validity: FormzStatus.valid,
+        ),
+        act: (bloc) async => await bloc.save(),
+        expect: () => [
+          TaskFormState(
+            content: 'Content'.toTextInput(),
+            validity: FormzStatus.valid,
+            saveState: const Data.loading(),
+          ),
+          TaskFormState(
+            content: 'Content'.toTextInput(),
+            validity: FormzStatus.valid,
+            saveState:
+                const Data.loaded(value: Task(id: '1', content: 'Content')),
+          ),
+        ],
+        verify: (_) {
+          verify(() => mockTaskRepository.createTask(any())).called(1);
+        },
+      );
+
+      blocTest<TaskFormBloc, TaskFormState>(
+        'catches error when saving task fails',
+        setUp: () {
+          when(() => mockTaskRepository.createTask(any()))
+              .thenThrow('Failed to save task');
+        },
+        build: () {
+          return TaskFormBloc(
+            taskRepository: mockTaskRepository,
+          );
+        },
+        seed: () => TaskFormState(
+          content: 'Content'.toTextInput(),
+          validity: FormzStatus.valid,
+        ),
+        act: (bloc) async => await bloc.save(),
+        expect: () => [
+          TaskFormState(
+            content: 'Content'.toTextInput(),
+            validity: FormzStatus.valid,
+            saveState: const Data.loading(),
+          ),
+          TaskFormState(
+            content: 'Content'.toTextInput(),
+            validity: FormzStatus.valid,
+            saveState: const Data.failure(error: 'Failed to save task'),
+          ),
+        ],
+        verify: (_) {
+          verify(() => mockTaskRepository.createTask(any())).called(1);
+        },
+      );
     });
 
     group('contentChanged', () {
@@ -138,9 +166,8 @@ void main() {
         expect: () => [
           TaskFormState(
             description: 'New Description'.toTextInput(),
-            validity: taskFormBloc.state.validateWith(
-              description: 'New Description'.toTextInput(),
-            ),
+            validity: taskFormBloc.state
+                .validateWith(description: 'New Description'.toTextInput()),
           ),
         ],
       );
@@ -168,9 +195,9 @@ void main() {
         act: (bloc) => bloc.durationUnitChanged('day'),
         expect: () => [
           TaskFormState(
-            durationUnit: DurationUnit.day.toFormInput(),
+            durationUnit: DurationUnit.day.nullable.toFormInput(),
             validity: taskFormBloc.state.validateWith(
-              durationUnit: DurationUnit.day.toFormInput(),
+              durationUnit: DurationUnit.day.nullable.toFormInput(),
             ),
           ),
         ],

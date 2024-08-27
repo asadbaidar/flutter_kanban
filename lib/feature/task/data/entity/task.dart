@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'task.g.dart';
 
 class TaskDataEntity implements ToModel<TaskData> {
-  TaskDataEntity({this.all});
+  const TaskDataEntity({this.all});
 
   factory TaskDataEntity.fromJson(JsonArray json) {
     return TaskDataEntity(all: json.mapJsonArray(TaskEntity.fromJson));
@@ -28,7 +28,7 @@ class TaskDataEntity implements ToModel<TaskData> {
 
 @JsonSerializable()
 class TaskEntity implements ToModel<Task> {
-  TaskEntity({
+  const TaskEntity({
     this.creatorId,
     this.createdAt,
     this.assigneeId,
@@ -98,7 +98,7 @@ class TaskEntity implements ToModel<Task> {
 
 @JsonSerializable()
 class TaskDueEntity implements ToModel<TaskDue> {
-  TaskDueEntity({
+  const TaskDueEntity({
     this.date,
     this.isRecurring,
     this.datetime,
@@ -129,7 +129,7 @@ class TaskDueEntity implements ToModel<TaskDue> {
 
 @JsonSerializable()
 class TaskDurationEntity implements ToModel<TaskDuration> {
-  TaskDurationEntity({
+  const TaskDurationEntity({
     this.amount,
     this.unit,
   });

@@ -17,7 +17,7 @@ void main() {
   group('SectionRepositoryImpl', () {
     test('should return list of sections successfully', () async {
       const projectId = 'project123';
-      final jsonResponse = [
+      const jsonResponse = [
         {
           'id': 'section1',
           'projectId': projectId,

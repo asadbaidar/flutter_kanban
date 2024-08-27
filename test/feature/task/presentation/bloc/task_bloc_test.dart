@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:common/common.dart';
 import 'package:core/feature/project/domain/domain.dart';
 import 'package:core/feature/task/task.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -115,5 +116,162 @@ void main() {
       taskBloc.onDragEnd();
       expect(taskBloc.state.draggingTask, null);
     });
+
+    blocTest<TaskBloc, TaskState>(
+      'emits new state with added task when addTask is called',
+      build: () => taskBloc,
+      seed: () => const TaskState(dataState: TaskDataState.loaded()),
+      act: (bloc) => bloc.addTask(const Task(id: '1', sectionId: 'section1')),
+      expect: () => [
+        const TaskState(
+          dataState: TaskDataState.loaded(
+            key: '1',
+            value: TaskData(
+              all: {
+                'section1': [Task(id: '1', sectionId: 'section1')],
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<TaskBloc, TaskState>(
+      'emits new state with updated task when updateTask is called',
+      build: () => taskBloc,
+      seed: () => TaskState(
+        dataState: TaskDataState.loaded(
+          value: TaskData(
+            all: Map.from({
+              'section1': [const Task(id: '1', sectionId: 'section1')],
+            }),
+          ),
+        ),
+      ),
+      act: (bloc) => bloc.updateTask(
+        const Task(
+          id: '1',
+          sectionId: 'section1',
+          content: 'Updated Task',
+        ),
+      ),
+      expect: () => [
+        const TaskState(
+          dataState: TaskDataState.loaded(
+            key: '1',
+            value: TaskData(
+              all: {
+                'section1': [
+                  Task(
+                    id: '1',
+                    sectionId: 'section1',
+                    content: 'Updated Task',
+                  ),
+                ],
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<TaskBloc, TaskState>(
+      'emits loading and then new state with moved task when moveTask is successful',
+      build: () {
+        when(
+          () => mockTaskRepository.moveTask(
+            id: any(named: 'id'),
+            sectionId: any(named: 'sectionId'),
+          ),
+        ).thenAnswer((_) async {});
+        return taskBloc;
+      },
+      seed: () => TaskState(
+        dataState: TaskDataState.loaded(
+          value: TaskData(
+            all: Map.from({
+              'section1': [const Task(id: '1', sectionId: 'section1')],
+            }),
+          ),
+        ),
+      ),
+      act: (bloc) async {
+        const task = Task(id: '1', sectionId: 'section1');
+        await bloc.moveTask(task, toSection: 'section2');
+      },
+      expect: () => [
+        const TaskState(
+          dataState: TaskDataState.loaded(
+            value: TaskData(
+              all: {
+                'section1': [],
+                'section2': [Task(id: '1', sectionId: 'section2')],
+              },
+            ),
+          ),
+          moveState: Data.loading(key: '1'),
+        ),
+        const TaskState(
+          dataState: TaskDataState.loaded(
+            value: TaskData(
+              all: {
+                'section1': [],
+                'section2': [Task(id: '1', sectionId: 'section2')],
+              },
+            ),
+          ),
+          moveState: Data.loaded(key: '1'),
+        ),
+      ],
+    );
+
+    blocTest<TaskBloc, TaskState>(
+      'emits loading and then failure when moveTask throws an error',
+      build: () {
+        when(
+          () => mockTaskRepository.moveTask(
+            id: any(named: 'id'),
+            sectionId: any(named: 'sectionId'),
+          ),
+        ).thenThrow('Failed to move task');
+        return taskBloc;
+      },
+      seed: () => TaskState(
+        dataState: TaskDataState.loaded(
+          value: TaskData(
+            all: Map.from({
+              'section1': [const Task(id: '1', sectionId: 'section1')],
+            }),
+          ),
+        ),
+      ),
+      act: (bloc) async {
+        const task = Task(id: '1', sectionId: 'section1');
+        await bloc.moveTask(task, toSection: 'section2');
+      },
+      expect: () => [
+        const TaskState(
+          dataState: TaskDataState.loaded(
+            value: TaskData(
+              all: {
+                'section1': [],
+                'section2': [Task(id: '1', sectionId: 'section2')],
+              },
+            ),
+          ),
+          moveState: Data.loading(key: '1'),
+        ),
+        const TaskState(
+          dataState: TaskDataState.loaded(
+            value: TaskData(
+              all: {
+                'section1': [Task(id: '1', sectionId: 'section1')],
+              },
+            ),
+          ),
+          moveState: Data.failure(key: '1', error: 'Failed to move task'),
+        ),
+      ],
+    );
   });
 }

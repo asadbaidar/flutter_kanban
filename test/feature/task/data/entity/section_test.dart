@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('SectionEntity', () {
     test('fromJson should return a valid SectionEntity', () {
-      final json = {
+      const json = {
         'id': '123',
         'project_id': '456',
         'order': 1,
@@ -20,7 +20,7 @@ void main() {
     });
 
     test('fromJson with null values should handle gracefully', () {
-      final json = {
+      const json = {
         'id': null,
         'project_id': null,
         'order': null,
@@ -47,7 +47,7 @@ void main() {
     });
 
     test('toJson should return a valid JSON map', () {
-      final sectionEntity = SectionEntity(
+      const sectionEntity = SectionEntity(
         id: '123',
         projectId: '456',
         order: 1,
@@ -63,7 +63,7 @@ void main() {
     });
 
     test('toModel should convert SectionEntity to Section', () {
-      final sectionEntity = SectionEntity(
+      const sectionEntity = SectionEntity(
         id: '123',
         projectId: '456',
         order: 1,

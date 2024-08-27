@@ -62,3 +62,7 @@ class Formsz {
             : FormzStatus.invalid;
   }
 }
+
+extension ToNullable<T> on T? {
+  T? get nullable => this;
+}

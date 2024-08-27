@@ -15,6 +15,17 @@ class HttpClientImpl extends HttpClient {
       };
 
   @override
+  Future<T> decodeData<T>(dynamic data, {Type t = Map<String, dynamic>}) async {
+    final result = data is String
+        ? data.jsonOrString
+        : data is Map<dynamic, dynamic>
+            ? data.map((key, value) => MapEntry(key.toString(), value))
+            : data;
+    return $cast(result) ??
+        (throw const NoDataException().copyWith(message: '$result'));
+  }
+
+  @override
   String? decodeErrorMessage(dynamic data, int statusCode) {
     if (data is String && data.isNotBlank) return data;
 

@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('ProjectEntity', () {
     test('fromJson creates a valid ProjectEntity', () {
-      final json = {
+      const json = {
         'id': '123',
         'name': 'Test Project',
         'comment_count': 5,

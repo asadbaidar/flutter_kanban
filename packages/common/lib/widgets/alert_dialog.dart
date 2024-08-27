@@ -93,7 +93,6 @@ class DialogCancelAction extends DialogTextAction {
   }) : super(LocaleStrings.cancel);
 }
 
-
 class ConfirmDiscardDialog extends StatelessWidget {
   const ConfirmDiscardDialog({
     this.onContinue,

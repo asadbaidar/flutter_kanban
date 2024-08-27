@@ -6,7 +6,7 @@ part 'task_completed.g.dart';
 
 @JsonSerializable()
 class TaskCompletedEntity implements ToModel<TaskCompleted> {
-  TaskCompletedEntity({
+  const TaskCompletedEntity({
     this.completedAt,
     this.content,
     this.projectId,

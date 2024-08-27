@@ -6,7 +6,7 @@ part 'section.g.dart';
 
 @JsonSerializable()
 class SectionEntity implements ToModel<Section> {
-  SectionEntity({
+  const SectionEntity({
     this.id,
     this.projectId,
     this.order,

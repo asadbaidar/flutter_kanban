@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('TaskDataEntity', () {
     test('fromJson should return a valid TaskDataEntity', () {
-      final json = [
+      const json = [
         {
           'creator_id': 'creator_123',
           'created_at': '2024-08-25T12:34:56Z',
@@ -23,7 +23,7 @@ void main() {
           },
           'duration': {
             'amount': 60,
-            'unit': 'minutes',
+            'unit': 'minute',
           },
           'id': 'task_123',
           'labels': ['label1', 'label2'],
@@ -54,7 +54,7 @@ void main() {
       expect(task?.due?.string, 'due_string');
       expect(task?.due?.timezone, 'UTC');
       expect(task?.duration?.amount, 60);
-      expect(task?.duration?.unit, 'minutes');
+      expect(task?.duration?.unit, 'minute');
       expect(task?.id, 'task_123');
       expect(task?.labels, ['label1', 'label2']);
       expect(task?.order, 1);
@@ -66,7 +66,7 @@ void main() {
     });
 
     test('toJson should return a valid JSON map', () {
-      final taskEntity = TaskEntity(
+      const taskEntity = TaskEntity(
         creatorId: 'creator_123',
         createdAt: '2024-08-25T12:34:56Z',
         assigneeId: 'assignee_123',
@@ -84,7 +84,7 @@ void main() {
         ),
         duration: TaskDurationEntity(
           amount: 60,
-          unit: 'minutes',
+          unit: 'minute',
         ),
         id: 'task_123',
         labels: ['label1', 'label2'],
@@ -119,7 +119,7 @@ void main() {
     });
 
     test('toModel should convert TaskDataEntity to TaskData', () {
-      final taskEntity = TaskEntity(
+      const taskEntity = TaskEntity(
         creatorId: 'creator_123',
         createdAt: '2024-08-25T12:34:56Z',
         assigneeId: 'assignee_123',
@@ -149,7 +149,7 @@ void main() {
         url: 'https://example.com/task_123',
       );
 
-      final taskDataEntity = TaskDataEntity(all: [taskEntity]);
+      const taskDataEntity = TaskDataEntity(all: [taskEntity]);
       final taskData = taskDataEntity.toModel();
 
       expect(taskData.all?['section_123']?.length, 1);
@@ -164,7 +164,10 @@ void main() {
       expect(task?.description, 'Task Description');
       expect(task?.due?.date, '2024-08-25');
       expect(task?.due?.isRecurring, false);
-      expect(task?.due?.datetime, DateTime.parse('2024-08-25T12:34:56Z'));
+      expect(
+        task?.due?.datetime,
+        DateTime.parse('2024-08-25T12:34:56Z').toLocal(),
+      );
       expect(task?.due?.string, 'due_string');
       expect(task?.due?.timezone, 'UTC');
       expect(task?.duration?.amount, 60);
@@ -182,7 +185,7 @@ void main() {
 
   group('TaskEntity', () {
     test('fromJson should return a valid TaskEntity', () {
-      final json = {
+      const json = {
         'creator_id': 'creator_123',
         'created_at': '2024-08-25T12:34:56Z',
         'assignee_id': 'assignee_123',
@@ -200,7 +203,7 @@ void main() {
         },
         'duration': {
           'amount': 60,
-          'unit': 'minutes',
+          'unit': 'minute',
         },
         'id': 'task_123',
         'labels': ['label1', 'label2'],
@@ -228,7 +231,7 @@ void main() {
       expect(taskEntity.due?.string, 'due_string');
       expect(taskEntity.due?.timezone, 'UTC');
       expect(taskEntity.duration?.amount, 60);
-      expect(taskEntity.duration?.unit, 'minutes');
+      expect(taskEntity.duration?.unit, 'minute');
       expect(taskEntity.id, 'task_123');
       expect(taskEntity.labels, ['label1', 'label2']);
       expect(taskEntity.order, 1);
@@ -240,7 +243,7 @@ void main() {
     });
 
     test('toJson should return a valid JSON map', () {
-      final taskEntity = TaskEntity(
+      const taskEntity = TaskEntity(
         creatorId: 'creator_123',
         createdAt: '2024-08-25T12:34:56Z',
         assigneeId: 'assignee_123',
@@ -258,7 +261,7 @@ void main() {
         ),
         duration: TaskDurationEntity(
           amount: 60,
-          unit: 'minutes',
+          unit: 'minute',
         ),
         id: 'task_123',
         labels: ['label1', 'label2'],
@@ -293,7 +296,7 @@ void main() {
     });
 
     test('toModel should convert TaskEntity to Task', () {
-      final taskEntity = TaskEntity(
+      const taskEntity = TaskEntity(
         creatorId: 'creator_123',
         createdAt: '2024-08-25T12:34:56Z',
         assigneeId: 'assignee_123',
@@ -335,7 +338,10 @@ void main() {
       expect(task.description, 'Task Description');
       expect(task.due?.date, '2024-08-25');
       expect(task.due?.isRecurring, false);
-      expect(task.due?.datetime, DateTime.parse('2024-08-25T12:34:56Z'));
+      expect(
+        task.due?.datetime,
+        DateTime.parse('2024-08-25T12:34:56Z').toLocal(),
+      );
       expect(task.due?.string, 'due_string');
       expect(task.due?.timezone, 'UTC');
       expect(task.duration?.amount, 60);
@@ -353,7 +359,7 @@ void main() {
 
   group('TaskDueEntity', () {
     test('fromJson should return a valid TaskDueEntity', () {
-      final json = {
+      const json = {
         'date': '2024-08-25',
         'is_recurring': false,
         'datetime': '2024-08-25T12:34:56Z',
@@ -371,7 +377,7 @@ void main() {
     });
 
     test('toJson should return a valid JSON map', () {
-      final taskDueEntity = TaskDueEntity(
+      const taskDueEntity = TaskDueEntity(
         date: '2024-08-25',
         isRecurring: false,
         datetime: '2024-08-25T12:34:56Z',
@@ -389,7 +395,7 @@ void main() {
     });
 
     test('toModel should convert TaskDueEntity to TaskDue', () {
-      final taskDueEntity = TaskDueEntity(
+      const taskDueEntity = TaskDueEntity(
         date: '2024-08-25',
         isRecurring: false,
         datetime: '2024-08-25T12:34:56Z',
@@ -401,7 +407,10 @@ void main() {
 
       expect(taskDue.date, '2024-08-25');
       expect(taskDue.isRecurring, false);
-      expect(taskDue.datetime, DateTime.parse('2024-08-25T12:34:56Z'));
+      expect(
+        taskDue.datetime,
+        DateTime.parse('2024-08-25T12:34:56Z').toLocal(),
+      );
       expect(taskDue.string, 'due_string');
       expect(taskDue.timezone, 'UTC');
     });
@@ -409,31 +418,31 @@ void main() {
 
   group('TaskDurationEntity', () {
     test('fromJson should return a valid TaskDurationEntity', () {
-      final json = {
+      const json = {
         'amount': 60,
-        'unit': 'minutes',
+        'unit': 'minute',
       };
 
       final taskDurationEntity = TaskDurationEntity.fromJson(json);
 
       expect(taskDurationEntity.amount, 60);
-      expect(taskDurationEntity.unit, 'minutes');
+      expect(taskDurationEntity.unit, 'minute');
     });
 
     test('toJson should return a valid JSON map', () {
-      final taskDurationEntity = TaskDurationEntity(
+      const taskDurationEntity = TaskDurationEntity(
         amount: 60,
-        unit: 'minutes',
+        unit: 'minute',
       );
 
       final json = taskDurationEntity.toJson();
 
       expect(json['amount'], 60);
-      expect(json['unit'], 'minutes');
+      expect(json['unit'], 'minute');
     });
 
     test('toModel should convert TaskDurationEntity to TaskDuration', () {
-      final taskDurationEntity = TaskDurationEntity(
+      const taskDurationEntity = TaskDurationEntity(
         amount: 60,
         unit: 'minute',
       );
