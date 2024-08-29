@@ -5,12 +5,12 @@ Flutter app for Kanban board to manage tasks using Todoist API.
 ## Features
 - [x] View all projects and select one to view tasks
 - [x] View all tasks and their details
-- [x] Add new or edit the task
-- [x] Move task between sections
-- [x] Add or view task comments
-- [x] Complete task
+- [x] Add a new task or edit one
+- [x] Move task between sections by dragging or with dropdown
+- [x] Add or view comments on task
+- [x] Complete a task
 - [x] View completed task history
-- [x] Reopen completed task
+- [x] Reopen the completed task
 
 ## Screenshots
 | Home | Board | Task |
